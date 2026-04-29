@@ -1,0 +1,92 @@
+name: 1 - Workflow complete Swift Vapor CI/Security review
+
+# El flujo se activa al hacer push o abrir un PR en la rama principal
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    # Vapor suele ejecutarse en entornos Linux para servidor
+    runs-on: ubuntu-latest
+    services:
+#      postgres:
+#        image: postgres:17.5
+#        env:
+#          POSTGRES_DB: egymDB
+#          POSTGRES_USER: gymUser
+#          POSTGRES_PASSWORD: NADGzUX+C4JhE35vRZ2sgLXDtSt5K7X9nxxyMUOaJt8=
+#        ports:
+#          - 5432:5432
+#        options: >-
+#          --health-cmd pg_isready
+#          --health-interval 10s
+#          --health-timeout 5s
+#          --health-retries 5
+
+#      redis:
+#        image: redis:latest
+#        ports:
+#          - 6379:6379
+#        options: >-
+#          --health-cmd "redis-cli ping"
+#          --health-interval 10s
+#          --health-timeout 5s
+#          --health-retries 5
+
+    steps:
+      # 1. Descarga el código del repositorio en el ejecutor
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      # 2. Instala la herramienta Swiftly y la última versión de Swift
+      # Swiftly pone el ejecutable de 'swift' en el PATH del ejecutor
+      - name: Install Swift
+        uses: vapor/swiftly-action@v0.2.1
+        with:
+          toolchain: latest
+
+      # 3. Compila el proyecto
+      - name: Build Project
+        run: swift build
+
+      # 4. Lanza los tests enfocándose en el target VaporWithTestContainersTests
+      # Nota: El comando 'swift test --filter' es el estándar de Swift Package Manager
+      - name: Run VaporWithTestContainersTests
+      # run: swift test --filter VaporWithTestContainersTests
+        run: |
+             swift test --filter VaporWithTestContainersTests 2>&1 | tee tests_output.txt
+             if grep -q "suites failed" tests_output.txt; then
+               echo "Fallaron los tests"
+               exit 1
+             fi
+             if grep -q "error: fatalError" tests_output.txt; then
+               echo "Error fatal grave"
+               exit 1
+             fi
+             echo "Todos los tests pasaron satisfactoriamente"
+             # Es otra forma de lanzar los tests, comprobando su resultado satisfactorio o no
+
+  security-review:
+    needs: build-and-test          # solo corre si build-and-test pasa
+    if: github.event_name == 'pull_request'   # solo en PRs, no en push a main
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    permissions:
+      pull-requests: write
+      contents: read
+    steps:
+      - uses: anthropics/claude-code-security-review@main
+        with:
+          comment-pr: true
+          claude-api-key: ${{ secrets.CLAUDE_API_KEY }}
+          claude-model: claude-haiku-4-5-20251001
+          exclude-directories: "Tests/VaporWithTestContainersTests"
+          # run-every-commit: true # corre en cada commit, false solo la primera vez
