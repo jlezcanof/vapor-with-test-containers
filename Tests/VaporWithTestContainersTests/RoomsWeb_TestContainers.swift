@@ -20,23 +20,38 @@ struct RoomsWeb_TestContainers {
         return DockerClient()
     }
     
+    private func makeDockerCLI() -> DockerClient {
+        let dockerPath = ProcessInfo.processInfo.environment["Users/lezcanin/.docker/run/docker.sock"]
+                ?? "/usr/local/bin/docker"
+            return DockerClient(dockerPath: dockerPath)
+    }
+    
     @Test
     func redisExample() async throws {
         
-        let runtime = DockerClient(socketPath: "/Users/lezcanin/.docker/run/docker.sock")
+//        let runtime = DockerClient(socketPath: "/Users/lezcanin/.docker/run/docker.sock")
+//        let dockerClient = DockerClient(dockerPath: "/usr/local/bin/docker")
+        let dockerClient = makeDockerCLI()
         
         
         let request = ContainerRequest(image: "redis:7")
             .withExposedPort(6379)
             .waitingFor(.tcpPort(6379))
-        
-        let resultado = try await runtime.createContainer(request)
+                
+        let resultado = try await dockerClient.createContainer(request)
         print("resultado is \(resultado)")
-
-        try await withContainer(request) { container in
+        
+        try await withContainer(request, runtime: dockerClient) { container in
+            let logs = try await container.logs()
+            print("logs \(logs)")
             let port = try await container.hostPort(6379)
             #expect(port > 0)
         }
+
+//        try await withContainer(request) { container in
+//            let port = try await container.hostPort(6379)
+//            #expect(port > 0)
+//        }
     }
 //
 //    @Test

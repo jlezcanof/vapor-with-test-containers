@@ -15,7 +15,7 @@ jobs:
   build-and-test:
     # Vapor suele ejecutarse en entornos Linux para servidor
     runs-on: ubuntu-latest
-    services:
+#    services:
 #      postgres:
 #        image: postgres:17.5
 #        env:
