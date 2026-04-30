@@ -16,10 +16,9 @@ let package = Package(
         // 🔵 Non-blocking, event-driven networking for Swift. Used for custom executors
         .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),// 2.60.0
         // 🧪 Test Containers
-            .package(path: "./swift-test-containers")//../swift-test-containers
+            .package(path: "./test-containers")//../swift-test-containers
 //        .package(url: "https://github.com/Mongey/swift-test-containers", revision: "0921a1f653b5f4da41875d800aeec162c5871f27"),
         // Pinned to last revision compatible with swift-test-containers (breaking changes landed 2026-03-13)
-//        .package(url: "https://github.com/swiftlang/swift-subprocess.git", revision: "ba5888ad7758cbcbe7abebac37860b1652af2d9c"),
     ],
     targets: [
         .executableTarget(
@@ -38,7 +37,7 @@ let package = Package(
             dependencies: [
                 .target(name: "VaporWithTestContainers"),
                 .product(name: "VaporTesting", package: "vapor"),
-                .product(name: "TestContainers", package: "swift-test-containers"),
+                .product(name: "TestContainers", package: "test-containers"),
             ],
             swiftSettings: swiftSettings
         )
