@@ -16,6 +16,7 @@ let package = Package(
     dependencies: [
 //        .package(url: "https://github.com/swiftlang/swift-subprocess.git", branch: "main"),
         .package(url: "https://github.com/swiftlang/swift-subprocess.git", revision: "ba5888ad7758cbcbe7abebac37860b1652af2d9c"),
+//        .package(url: "https://github.com/swiftlang/swift-subprocess.git", from: "0.3"),
         .package(url: "https://github.com/apple/swift-crypto.git", from: "3.0.0"),
         .package(url: "https://github.com/swift-server/async-http-client.git", from: "1.21.0"),
     ],
