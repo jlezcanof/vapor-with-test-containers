@@ -18,16 +18,22 @@ struct RoomsWeb_TestContainers {
             return DockerClient(dockerPath: dockerPath)
     }
     
-    @Test("Redis Example") // , .disabled()
+    @Test("Redis Example")
     func redisExample() async throws {
         
         let dockerClient = makeDockerCLI()
         
-//        let runtime = AppleContainerClient()
+        //  let runtime = AppleContainerClient()
         
-        let detectRuntime = detectRuntime(preferred: .appleContainer)
+        let dockerRuntime = detectRuntime(preferred: .docker)
+        if await dockerRuntime.isAvailable() {
+            print("docker runtime is available")
+        } else {
+            print("docker runtime is not available")
+        }
         
-        if await detectRuntime.isAvailable() {
+        let appleContainer = detectRuntime(preferred: .appleContainer)
+        if await appleContainer.isAvailable() {
             print("apple container is available")
         } else {
             print("apple container is not available")
