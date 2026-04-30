@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "swift-test-containers",//swift-test-containers
+    name: "test-containers",//swift-test-containers
     platforms: [
         .macOS(.v13)
     ],

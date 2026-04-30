@@ -23,12 +23,22 @@ struct RoomsWeb_TestContainers {
         
         let dockerClient = makeDockerCLI()
         
+//        let runtime = AppleContainerClient()
+        
+        let detectRuntime = detectRuntime(preferred: .appleContainer)
+        
+        if await detectRuntime.isAvailable() {
+            print("apple container is available")
+        } else {
+            print("apple container is not available")
+        }
+        
         let containerRequest = ContainerRequest(image: "redis:alpine")// redis:7
             .withExposedPort(6379)
             .waitingFor(.tcpPort(6379))
                 
         let idContainer = try await dockerClient.createContainer(containerRequest)
-        print("resultado is \(idContainer)")
+        print("idContainer is \(idContainer)")
         
         try await withContainer(containerRequest, runtime: dockerClient) { container in
             let logs = try await container.logs()
