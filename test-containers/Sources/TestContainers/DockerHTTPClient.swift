@@ -67,7 +67,8 @@ struct DockerHTTPClient: Sendable {
         request.method = .GET
         let response = try await httpClient.execute(request, timeout: timeout)
         let body = try await response.body.collect(upTo: 10 * 1024 * 1024) // 10 MB limit
-        return (response.status, Data(buffer: body))//readableBytesView
+        // Data(buffer: body)
+        return (response.status, Data(body.readableBytesView))
     }
 
     /// Perform a POST request with an optional JSON body.
@@ -89,7 +90,8 @@ struct DockerHTTPClient: Sendable {
         }
         let response = try await httpClient.execute(request, timeout: timeout)
         let responseBody = try await response.body.collect(upTo: 10 * 1024 * 1024)
-        return (response.status, Data(buffer: responseBody))// .readableBytesView
+        // Data(buffer: responseBody)
+        return (response.status, Data(responseBody.readableBytesView))
     }
 
     /// Perform a PUT request with an optional JSON body.
@@ -107,7 +109,8 @@ struct DockerHTTPClient: Sendable {
         }
         let response = try await httpClient.execute(request, timeout: timeout)
         let responseBody = try await response.body.collect(upTo: 10 * 1024 * 1024)
-        return (response.status, Data(buffer: responseBody))//readableBytesView
+        // Data(buffer: responseBody)
+        return (response.status, Data(responseBody.readableBytesView))
     }
 
     /// Perform a DELETE request.
@@ -120,7 +123,8 @@ struct DockerHTTPClient: Sendable {
         request.method = .DELETE
         let response = try await httpClient.execute(request, timeout: timeout)
         let body = try await response.body.collect(upTo: 10 * 1024 * 1024)
-        return (response.status, Data(buffer: body))// readableBytesView
+        //Data(buffer: body)
+        return (response.status, Data(body.readableBytesView))
     }
 
     /// Perform a streaming POST request and collect the full response body.
@@ -145,7 +149,8 @@ struct DockerHTTPClient: Sendable {
         }
         let response = try await httpClient.execute(request, timeout: timeout)
         let responseBody = try await response.body.collect(upTo: 100 * 1024 * 1024) // 100 MB for streaming
-        return (response.status, Data(buffer: responseBody))//readableBytesView
+        // Data(buffer: responseBody)
+        return (response.status, Data(responseBody.readableBytesView))
     }
 
     /// Perform a GET request and return the raw response for streaming.
