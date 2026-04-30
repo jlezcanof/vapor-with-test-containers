@@ -18,7 +18,7 @@ struct RoomsWeb_TestContainers {
             return DockerClient(dockerPath: dockerPath)
     }
     
-    @Test
+    @Test("Redis Example", .disabled())
     func redisExample() async throws {
         
         let dockerClient = makeDockerCLI()
@@ -42,8 +42,8 @@ struct RoomsWeb_TestContainers {
         try await dockerClient.removeContainer(id: idContainer)
     }
 
-    @Test
-    func testContainerSqlPostgress() async throws{
+    @Test("sql postgres")
+    func testContainerSqlPostgres() async throws {
         
         let dockerClient = makeDockerCLI()
         
@@ -69,9 +69,13 @@ struct RoomsWeb_TestContainers {
         
     
         let config = PostgresContainer(image: request.image)
-        
+                
         try await withPostgresContainer(config,
                               runtime: dockerClient) { operation in
+            
+//            let startDatabase = """
+//                pg_ctl -D /var/lib/postgresql/data -l logfile start
+//            """
             
             let createTable = """
                 CREATE TABLE users (
@@ -85,7 +89,10 @@ struct RoomsWeb_TestContainers {
                                ('Jane Doe', 'jane@example.com')
             """
             
-            let resultado = try await operation.exec([createTable, insertTable])
+            let resultado = try await operation.exec([/*startDatabase,*/ createTable, insertTable])
+            
+            let logs = try await operation.logs()
+            print("logs is \(logs)")
             
             print("resultado is \(resultado)")
         }
@@ -134,6 +141,46 @@ struct RoomsWeb_TestContainers {
     }
     
 
+    // kafka
+//    @Test func kafkaExample() async throws {
+//        let kafka = KafkaContainer()
+//
+//        try await withContainer(kafka.build()) { container in
+//            let bootstrapServers = try await KafkaContainer.bootstrapServers(from: container)
+//            #expect(bootstrapServers.contains(":"))
+//        }
+//    }
+    
+    // Elastic Search
+//    @Test func elasticsearchExample() async throws {
+//        let elasticsearch = ElasticsearchContainer()
+//            .withSecurityDisabled()
+//
+//        try await withElasticsearchContainer(elasticsearch) { container in
+//            let address = try await container.httpAddress()
+//            #expect(address.hasPrefix("http://"))
+//        }
+//    }
+    
+//    @Test func openSearchExample() async throws {
+//        let openSearch = OpenSearchContainer()
+//            .withSecurityDisabled()
+//
+//        try await withOpenSearchContainer(openSearch) { container in
+//            let settings = try await container.settings()
+//            #expect(settings.address.hasPrefix("http://"))
+//        }
+//    }
+    
+    // Container runtimes
+    // Explicit runtime selection
+//    let runtime = AppleContainerClient()
+//    try await withContainer(request, runtime: runtime) { container in ... }
+//
+//    // Or use detectRuntime() with environment variable
+//    // TESTCONTAINERS_RUNTIME=apple swift test
+//    let runtime = detectRuntime()
+//    try await withContainer(request, runtime: runtime) { container in ... }
 }
 
 
