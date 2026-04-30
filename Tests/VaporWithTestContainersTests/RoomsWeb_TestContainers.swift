@@ -95,6 +95,9 @@ struct RoomsWeb_TestContainers {
             print("logs is \(logs)")
             
             print("resultado is \(resultado)")
+            
+//            #expect(resultado.stdout.contains("OCI runtime exec failed:")) //  > 0
+
         }
 //        
 //        try await withContainer(request, runtime: dockerClient) { container in
