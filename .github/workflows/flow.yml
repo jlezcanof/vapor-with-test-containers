@@ -12,6 +12,13 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  test-container:
+    runs-on: macos-26
+    steps:
+#      - uses: action@checkout@v4
+      - run: swift --version
+      - run: container --help
+
   build-and-test:
     # Vapor suele ejecutarse en entornos Linux para servidor
     runs-on: ubuntu-latest
@@ -49,8 +56,8 @@ jobs:
            ls -la $(which docker)
 
       # 2. Apple container info
-      - name: Info about apple container
-        run: container version
+#      - name: Info about apple container
+#        run: container version
 
       # 3. Descarga el código del repositorio en el ejecutor
       - name: Checkout code
