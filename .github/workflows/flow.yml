@@ -57,9 +57,9 @@ jobs:
         run: swift build
 
       # 4. Verify docker is running
-#        - name: Verify Docker is running
-#          run: |
-#                docker --version
+        - name: Verify Docker is running
+          run: |
+                docker --version
 #                sudo systemctl start docker || true
 #                sudo chmod 666 /var/run/docker.sock
 #                docker info
