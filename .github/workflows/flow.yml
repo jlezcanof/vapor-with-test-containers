@@ -52,7 +52,7 @@ jobs:
       - name: Brew info container
         run: brew info container
 
-      # 3. Install docker CLI
+      # 3. Update brew / Install docker CLI
       - name: Instalar Docker CLI
         run: |
           brew update
@@ -68,7 +68,7 @@ jobs:
 
       # 4. Instala la herramienta Swiftly y la última versión de Swift TODO
       # Swiftly pone el ejecutable de 'swift' en el PATH del ejecutor
-      #- name: Install Swift
+      #  name: Install Swift
       #  uses: vapor/swiftly-action@v0.2.1
       #  with:
       #    toolchain: latest
