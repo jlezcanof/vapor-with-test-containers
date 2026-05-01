@@ -57,6 +57,7 @@ jobs:
         run: |
           brew update
           brew install docker
+          ls -la $(which docker)
 
       # 4. Docker version
       - name: Verificar docker version
