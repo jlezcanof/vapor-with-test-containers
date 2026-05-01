@@ -54,15 +54,15 @@ jobs:
 
       # 3. Info docker install
       - name: Ver si docker está instalado
-        run: docker --version
+        # run: docker --version
+        run: |
+             docker --version
+             docker info
+             ls -la ¢(which docker)
 
       # 4. Compila el proyecto
       - name: Build Project
         run: swift build
-
- #     - name: Prueba a ver que pasa
- #       #run: echo "que casa mas bonita"
- #       run: dockver --version
 
       # 5. Verify docker is running
 #        - name: Verify Docker is running
