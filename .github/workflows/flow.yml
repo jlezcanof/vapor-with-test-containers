@@ -42,11 +42,11 @@ jobs:
 
     steps:
       # 1. Docker info
-      - name: Info about docker
-      run: |
-           docker --version
-           docker info
-           ls -la $(which docker)
+#      - name: Info about docker
+#      run: |
+#           docker --version
+#           docker info
+#           ls -la $(which docker)
 
       # 2. Apple container info
 #      - name: Info about apple container
