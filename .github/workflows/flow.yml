@@ -12,19 +12,21 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test-container:
-    runs-on: macos-26
-    steps:
+  # test-container:
+  #  runs-on: macos-26
+  #  steps:
 #      - uses: action@checkout@v4
-      - run: swift --version
-      - run: brew info container
-      - run: brew install container
+ #     - run: swift --version
+ #     - run: brew info container
+ #     - run: brew install container
+      #- run: brew services start container
 
   build-and-test:
     # Vapor suele ejecutarse en entornos Linux para servidor
-    runs-on: ubuntu-latest
 
+    # runs-on: ubuntu-latest
     #needs: test-container
+    runs-on: macos-26
 
 #    services:
 #      postgres:
@@ -52,6 +54,13 @@ jobs:
 #          --health-retries 5
 
     steps:
+      - name: Version of swift
+        run: swift --version
+
+      - name: Brew info container
+        run: brew info container
+
+
       # 1. Docker info
       - name: Info about docker
         run: |
