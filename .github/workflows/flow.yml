@@ -56,6 +56,9 @@ jobs:
       - name: Build Project
         run: swift build
 
+      - name: Prueba a ver que pasa
+        run: echo "que casa mas bonita"
+
       # 4. Verify docker is running
 #        - name: Verify Docker is running
 #          run: echo "Esta casa es muy bonita"
