@@ -49,8 +49,8 @@ jobs:
            ls -la $(which docker)
 
       # 2. Apple container info
-      - name: Info about apple container
-      run: container version
+#      - name: Info about apple container
+#      run: container version
 
       # 3. Descarga el código del repositorio en el ejecutor
       - name: Checkout code
