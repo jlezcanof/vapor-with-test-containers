@@ -60,13 +60,20 @@ jobs:
       - name: Brew info container
         run: brew info container
 
-
-      # 1. Docker info
-      - name: Info about docker
+      - name: Instalar Docker CLI
         run: |
-           docker --version
-           docker info
-           ls -la $(which docker)
+          brew update
+          brew install docker
+
+      - name: Verificar docker version
+        run: docker --version
+      
+#      # 1. Docker info
+#      - name: Info about docker
+#        run: |
+#           docker --version
+#           docker info
+#           ls -la $(which docker)
 
       # 2. Apple container info
 #      - name: Info about apple container
