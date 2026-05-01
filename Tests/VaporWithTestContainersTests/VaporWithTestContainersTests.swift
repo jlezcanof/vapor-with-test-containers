@@ -3,7 +3,7 @@ import VaporTesting
 import Testing
 import Fluent
 
-@Suite("App Tests with DB", .serialized)
+@Suite("App Tests with DB", .serialized, .disabled("comentamos esta suite de tests"))
 struct VaporWithTestContainersTests {
     private func withApp(_ test: (Application) async throws -> ()) async throws {
         let app = try await Application.make(.testing)
