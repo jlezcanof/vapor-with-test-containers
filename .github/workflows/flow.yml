@@ -47,6 +47,9 @@ jobs:
       - name: Version of swift
         run: swift --version
 
+      - name: Dump github context
+        run: echo $ {{ github }}
+
       # 2. Info about container
       - name: Brew info container
         run: brew info container
