@@ -60,7 +60,7 @@ jobs:
           ls -la $(which docker)
          
 #      - name: Dump github context
-#        run: echo '${{ toJson(github) }}'
+#        run: echo ${{ toJson(github) }}
 
       # 4. Docker version
       - name: Verificar docker version
