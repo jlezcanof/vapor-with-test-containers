@@ -48,53 +48,7 @@ jobs:
       # 1. Version of swift
       - name: Version of swift
         run: swift --version
-
-      # 2. Info about container
-      #- name: Brew info container
-      #  run: brew info container
-
-      # 3. Update brew / Install docker CLI
-      #- name: Instalar Docker CLI
-      #  run: |
-      #    brew update
-      #    brew install docker
-      #    ls -la $(which docker)
-         
-      # 4. Docker version
-      #- name: Verificar docker version
-      #  run: docker --version
       
-      # 5. Descarga el código del repositorio en el ejecutor
-      #- name: Checkout code
-      #  uses: actions/checkout@v6
-
-      # 4. Instala la herramienta Swiftly y la última versión de Swift TODO
-      # Swiftly pone el ejecutable de 'swift' en el PATH del ejecutor
-      #  name: Install Swift
-      #  uses: vapor/swiftly-action@v0.2.1
-      #  with:
-      #    toolchain: latest
-
-      # 6. Compila el proyecto
-      #- name: Build Project
-      #  run: swift build
-
-      # 7. Lanza los tests enfocándose en el target VaporWithTestContainersTests
-      # Nota: El comando 'swift test --filter' es el estándar de Swift Package Manager
-      #- name: Run VaporWithTestContainersTests
-      #  run: |
-      #       swift test --filter VaporWithTestContainersTests 2>&1 | tee tests_output.txt
-      #       if grep -q "suites failed" tests_output.txt; then
-      #         echo "Fallaron los tests"
-      #         exit 1
-      #       fi
-      #       if grep -q "error: fatalError" tests_output.txt; then
-      #         echo "Error fatal grave"
-      #         exit 1
-      #       fi
-      #       echo "Todos los tests pasaron satisfactoriamente"
-      #       # Es otra forma de lanzar los tests, comprobando su resultado satisfactorio o no
-
   security-review:
     needs: build-and-test          # solo corre si build-and-test pasa
     if: github.event_name == 'pull_request'   # solo en PRs, no en push a main
