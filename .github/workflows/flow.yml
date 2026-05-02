@@ -58,13 +58,7 @@ jobs:
           brew update
           brew install docker
           ls -la $(which docker)
-          #echo "Valores de github"
-          #echo ${{ github.workflow }}
-          #echo ${{ github.ref }}
-          #echo ${{ github.actor }}
-          #echo ${{ github.actor_id }}
-          #echo ${{ github.trigerring_actor }}
-
+         
 #      - name: Dump github context
 #        run: echo '${{ toJson(github) }}'
 
