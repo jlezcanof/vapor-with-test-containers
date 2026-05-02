@@ -15,7 +15,6 @@ jobs:
   build-and-test:
     # Vapor suele ejecutarse en entornos Linux para servidor
     # runs-on: ubuntu-latest
-    #needs: test-container
     runs-on: macos-26
 
 #    services:
@@ -58,6 +57,7 @@ jobs:
           brew update
           brew install docker
           ls -la $(which docker)
+
       # 4. Docker version
       - name: Verificar docker version
         run: docker --version
