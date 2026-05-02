@@ -18,7 +18,7 @@ struct RoomsWeb_TestContainers {
             return DockerClient(dockerPath: dockerPath)
     }
     
-    @Test("Redis Example")
+    @Test("Tests redis Example")
     func redisExample() async throws {
         
         let dockerClient = makeDockerCLI()

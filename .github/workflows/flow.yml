@@ -8,7 +8,7 @@ on:
     types: [opened, synchronize, reopened, ready_for_review]
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref_name }}
   cancel-in-progress: true
 
 jobs:
@@ -46,7 +46,7 @@ jobs:
     steps:
       # 1. Version of swift
       - name: Version of swift
-        run: swift --version
+         run: swift --version
 
       # 2. Info about container
       - name: Brew info container
@@ -58,8 +58,16 @@ jobs:
           brew update
           brew install docker
           ls -la $(which docker)
-          echo ${{ github.workflow }}
-          echo ${{ github.ref }}
+          #echo "Valores de github"
+          #echo ${{ github.workflow }}
+          #echo ${{ github.ref }}
+          #echo ${{ github.actor }}
+          #echo ${{ github.actor_id }}
+          #echo ${{ github.trigerring_actor }}
+          #ecgi ${{ github.}}
+
+      - name: Dump github context
+        run: echo '${{ toJson(github) }}'
 
       # 4. Docker version
       - name: Verificar docker version
