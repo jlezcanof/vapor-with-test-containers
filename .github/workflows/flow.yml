@@ -64,8 +64,9 @@ jobs:
           brew update
           # brew install docker
           brew install docker colima
+          colima status
           brew services start colima
-          #colima start
+          colima start
           ls -la $(which docker)
           # docker context ls
 
