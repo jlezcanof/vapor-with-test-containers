@@ -62,7 +62,9 @@ jobs:
       - name: Instalar Docker CLI
         run: |
           brew update
-          brew install docker
+          # brew install docker
+          brew install docker colima
+          colima start
           ls -la $(which docker)
           # docker context ls
 
