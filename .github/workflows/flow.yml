@@ -69,8 +69,10 @@ jobs:
       # 4. Info about Docker Engine, api version
       - name: Verificar version docker engine, api
         run: |
-         docker context ls 
          docker version
+         docker context show
+         docker context ls
+         #docker context inspect
       
       # 5. Descarga el código del repositorio en el ejecutor
       - name: Checkout code
