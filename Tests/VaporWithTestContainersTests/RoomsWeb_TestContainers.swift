@@ -21,9 +21,9 @@ struct RoomsWeb_TestContainers {
     
     @Test func pruebaRedisExample() async throws {
         
-        print("init detectRuntime")
+//        print("init detectRuntime")
         let dockerRuntime = detectRuntime(preferred: .docker)
-        print("end detectRuntime")
+//        print("end detectRuntime")
         
         let request = ContainerRequest(image: "redis:7")
             .withExposedPort(6379)

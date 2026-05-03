@@ -17,7 +17,6 @@ public enum ContainerRuntimeType: String, Sendable {
 /// - Returns: A container runtime instance
 public func detectRuntime(preferred: ContainerRuntimeType? = nil) -> any ContainerRuntime {
     let runtimeType: ContainerRuntimeType
-    print("detectRuntime")
     if let testcontainersruntime = ProcessInfo.processInfo.environment["TESTCONTAINERS_RUNTIME"] {
         print("TESTCONTAINERS_RUNTIME = \(testcontainersruntime)")
     } else {
