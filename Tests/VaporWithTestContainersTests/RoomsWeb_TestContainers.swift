@@ -14,7 +14,7 @@ struct RoomsWeb_TestContainers {
         
     private func makeDockerCLI() -> DockerClient {
         let dockerPath = ProcessInfo.processInfo.environment["Users/lezcanin/.docker/run/docker.sock"]//nunca obtiene este
-                ?? "/usr/local/bin/docker"
+                ??  "/opt/homebrew/bin/docker"// usr/local/bin/docker
             return DockerClient(dockerPath: dockerPath)
     }
     
