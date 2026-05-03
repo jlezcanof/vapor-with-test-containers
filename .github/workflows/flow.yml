@@ -89,6 +89,7 @@ jobs:
       # Nota: El comando 'swift test --filter' es el estándar de Swift Package Manager
       - name: Run VaporWithTestContainersTests
         run: |
+             export TESTCONTAINERS_RUN_DOCKERS_TESTS=1
              swift test --filter VaporWithTestContainersTests 2>&1 | tee tests_output.txt
              if grep -q "suites failed" tests_output.txt; then
                echo "Fallaron los tests"
