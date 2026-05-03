@@ -19,7 +19,18 @@ struct RoomsWeb_TestContainers {
             return DockerClient(dockerPath: dockerPath)
     }
     
-    @Test("Tests redis Example")
+    @Test func pruebaRedisExample() async throws {
+        let request = ContainerRequest(image: "redis:7")
+            .withExposedPort(6379)
+            .waitingFor(.tcpPort(6379))
+
+        try await withContainer(request) { container in
+            let port = try await container.hostPort(6379)
+            #expect(port > 0)
+        }
+    }
+    
+    @Test("Tests redis Example", .disabled())
     func redisExample() async throws {
         
 //        print("docker client")
@@ -35,12 +46,12 @@ struct RoomsWeb_TestContainers {
             print("docker runtime is not available")
         }
         
-        let appleContainer = detectRuntime(preferred: .appleContainer)
-        if await appleContainer.isAvailable() {
-            print("apple container is available")
-        } else {
-            print("apple container is not available")
-        }
+//        let appleContainer = detectRuntime(preferred: .appleContainer)
+//        if await appleContainer.isAvailable() {
+//            print("apple container is available")
+//        } else {
+//            print("apple container is not available")
+//        }
         
         let containerRequest = ContainerRequest(image: "redis:alpine")// redis:7
             .withExposedPort(6379)
