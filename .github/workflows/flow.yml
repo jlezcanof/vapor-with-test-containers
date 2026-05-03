@@ -69,6 +69,7 @@ jobs:
       # 4. Info about Docker Engine, api version
       - name: Verificar version docker engine, api
         run: |
+         docker ps
          docker version
          docker context show
          docker context ls
