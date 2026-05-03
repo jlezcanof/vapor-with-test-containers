@@ -20,14 +20,24 @@ struct RoomsWeb_TestContainers {
     }
     
     @Test func pruebaRedisExample() async throws {
+        
+        print("init detectRuntime")
+        let dockerRuntime = detectRuntime(preferred: .docker)
+        print("end detectRuntime")
+        
         let request = ContainerRequest(image: "redis:7")
             .withExposedPort(6379)
             .waitingFor(.tcpPort(6379))
-
-        try await withContainer(request) { container in
+        
+        try await withContainer(request, runtime: dockerRuntime) { container in
             let port = try await container.hostPort(6379)
             #expect(port > 0)
         }
+        
+        //        try await withContainer(request) { container in
+        //            let port = try await container.hostPort(6379)
+        //            #expect(port > 0)
+        //        }
     }
     
     @Test("Tests redis Example", .disabled())
