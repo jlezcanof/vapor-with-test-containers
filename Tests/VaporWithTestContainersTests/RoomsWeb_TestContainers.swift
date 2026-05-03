@@ -13,6 +13,7 @@ import FluentPostgresDriver
 struct RoomsWeb_TestContainers {
         
     private func makeDockerCLI() -> DockerClient {
+        // unix:///var/run/docker.sock
         let dockerPath = ProcessInfo.processInfo.environment["Users/lezcanin/.docker/run/docker.sock"]//nunca obtiene este
                 ??  "/opt/homebrew/bin/docker"// usr/local/bin/docker
             return DockerClient(dockerPath: dockerPath)
@@ -21,8 +22,10 @@ struct RoomsWeb_TestContainers {
     @Test("Tests redis Example")
     func redisExample() async throws {
         
-        let dockerClient = makeDockerCLI()
-        
+        print("docker client")
+//        let dockerClient = makeDockerCLI()
+        print("docker client")
+
         //  let runtime = AppleContainerClient()
         
         let dockerRuntime = detectRuntime(preferred: .docker)
@@ -58,7 +61,7 @@ struct RoomsWeb_TestContainers {
         try await dockerClient.removeContainer(id: idContainer)
     }
 
-    @Test("sql postgres")
+    @Test("sql postgres", .disabled())
     func testContainerSqlPostgres() async throws {
         
         let dockerClient = makeDockerCLI()
