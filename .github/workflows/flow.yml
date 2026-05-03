@@ -68,7 +68,7 @@ jobs:
 
       # 4. Docker version
       - name: Verificar docker version
-        run: docker --version
+        run: docker version
       
       # 5. Descarga el código del repositorio en el ejecutor
       - name: Checkout code

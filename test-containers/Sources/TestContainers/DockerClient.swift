@@ -51,11 +51,12 @@ public struct DockerClient: ContainerRuntime, Sendable {
     // MARK: - Docker Availability
 
     public func isAvailable() async -> Bool {
+        print("DockerClient.isAvailable y tal ")
         guard let httpClient else {
             // CLI fallback
             logger.debug("Checking Docker availability via CLI")
             do {
-                print("Dockerclient.isAvaiable, path : \(dockerPath)")
+                print("Dockerclient.isAvailable, path : \(dockerPath)")
                 let output = try await runner.run(executable: dockerPath, arguments: ["info"])
                 let available = output.exitCode == 0
                 if available {
