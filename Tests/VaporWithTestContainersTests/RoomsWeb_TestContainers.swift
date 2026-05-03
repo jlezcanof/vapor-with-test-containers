@@ -22,9 +22,9 @@ struct RoomsWeb_TestContainers {
     @Test("Tests redis Example")
     func redisExample() async throws {
         
-        print("docker client")
+//        print("docker client")
 //        let dockerClient = makeDockerCLI()
-        print("docker client")
+//        print("docker client")
 
         //  let runtime = AppleContainerClient()
         
@@ -46,10 +46,12 @@ struct RoomsWeb_TestContainers {
             .withExposedPort(6379)
             .waitingFor(.tcpPort(6379))
                 
-        let idContainer = try await dockerClient.createContainer(containerRequest)
+        let idContainer = try await dockerRuntime.createContainer(containerRequest)//dockerClient
         print("idContainer is \(idContainer)")
         
-        try await withContainer(containerRequest, runtime: dockerClient) { container in
+        
+        //dockerClient
+        try await withContainer(containerRequest, runtime: dockerRuntime) { container in
             let logs = try await container.logs()
             print("\(logs)")
             let port = try await container.hostPort(6379)
@@ -57,8 +59,8 @@ struct RoomsWeb_TestContainers {
             #expect(port > 0)
         }
 
-        try await dockerClient.removeImage(idContainer)
-        try await dockerClient.removeContainer(id: idContainer)
+        try await dockerRuntime.removeImage(idContainer)// dockerclient
+        try await dockerRuntime.removeContainer(id: idContainer)// dockerclient
     }
 
     @Test("sql postgres", .disabled())
