@@ -1,5 +1,7 @@
 name: 1 - Workflow complete Swift Vapor CI/Security review
 
+env:
+  TESTCONTAINERS_RUN_DOCKER_TESTS : "1"
 # El flujo se activa al hacer push o abrir un PR en la rama principal
 on:
   push:
