@@ -14,10 +14,47 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  #build-and-test-in-macos-26:
+  #  runs-on: macos-26
+  #  steps:
+  #    - name: Version of swift
+  #      run: swift --version
+
+#      - name: Dump github context
+#        run: |
+#	  echo ${{ github }}
+#             echo ${{ github.actor }}
+
+  # 2. Info about container
+      #- name: Brew info container
+      #  run: brew info container
+
+# 3. Update brew / Install docker CLI
+      #- name: Instalar Docker CLI
+      #  run: |
+      #    brew update
+      #    # brew install docker
+      #    brew install docker colima
+      #    ls -la $(which colima)
+      #    #colima status
+          #brew services start colima
+          #colima start
+      #    /opt/homebrew/opt/colima/bin/colima start -f
+          # docker context ls
+
+  # 4. Info about Docker Engine, api version
+      #- name: Verificar version docker engine, api
+      #  run: |
+      #   ls -la $(which docker)
+         #docker ps
+         #docker version
+         #docker context show
+         #docker context ls
+         #docker context inspect
+
   build-and-test:
     # Vapor suele ejecutarse en entornos Linux para servidor
     runs-on: ubuntu-latest
-    #runs-on: macos-26
 
 #    services:
 #      postgres:

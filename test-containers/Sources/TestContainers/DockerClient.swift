@@ -66,9 +66,11 @@ public struct DockerClient: ContainerRuntime, Sendable {
                 }
                 return available
             } catch {
+                print("Docker availability check threw error ")
                 logger.error("Docker availability check threw error", metadata: ["error": "\(error)"])
                 return false
             }
+            print("DockerClient.isAvailable end ")
         }
 
         logger.debug("Checking Docker availability via API")
