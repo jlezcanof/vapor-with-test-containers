@@ -28,10 +28,11 @@ public struct DockerClient: ContainerRuntime, Sendable {
 
     /// Create a DockerClient that communicates with the Docker Engine API over a Unix socket.
     public init(
-        socketPath: String = "/var/run/docker.sock",
+        socketPath: String = "/tmp/docker-debug.sock",//"/var/run/docker.sock"
         dockerPath: String = "docker",
         logger: TCLogger = .null
     ) {
+        print("Dockerclient.init")
         self.httpClient = DockerHTTPClient(socketPath: socketPath)
         self.dockerPath = dockerPath
         self.logger = logger
@@ -73,7 +74,7 @@ public struct DockerClient: ContainerRuntime, Sendable {
                 return false
             }
         }
-        print("Checking docker availability via API")
+        print("httpClient no es nulo por lo que Checking docker availability via API")
         logger.debug("Checking Docker availability via API")
         let start = ContinuousClock.now
         do {
