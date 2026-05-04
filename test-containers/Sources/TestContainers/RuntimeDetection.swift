@@ -17,6 +17,7 @@ public enum ContainerRuntimeType: String, Sendable {
 /// - Returns: A container runtime instance
 public func detectRuntime(preferred: ContainerRuntimeType? = nil) -> any ContainerRuntime {
     let runtimeType: ContainerRuntimeType
+    
 //    if let testcontainersruntime = ProcessInfo.processInfo.environment["TESTCONTAINERS_RUNTIME"] {
 //        print("TESTCONTAINERS_RUNTIME = \(testcontainersruntime)")
 //    } else {
@@ -24,14 +25,12 @@ public func detectRuntime(preferred: ContainerRuntimeType? = nil) -> any Contain
 //    }
     
     if let preferred {
-//        print("runtimeType = preferred")
         runtimeType = preferred
     } else if let envValue = ProcessInfo.processInfo.environment["TESTCONTAINERS_RUNTIME"],
               let fromEnv = ContainerRuntimeType(rawValue: envValue.lowercased()) {
-//        print("runtimeType = fromEnv")
         runtimeType = fromEnv
     } else {
-//        print("return DockerClient()")
+        print("sino existe variable de entorno TESTCONTAINERS_RUNTIME, entonces inicializa a DockerClient()")
         return DockerClient()
     }
 

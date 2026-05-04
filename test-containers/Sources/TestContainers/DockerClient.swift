@@ -51,7 +51,7 @@ public struct DockerClient: ContainerRuntime, Sendable {
     // MARK: - Docker Availability
 
     public func isAvailable() async -> Bool {
-        print("DockerClient.isAvailable y tal ")
+        print("method cockerClient.isAvailable y tal ")
         guard let httpClient else {
             // CLI fallback
             logger.debug("Checking Docker availability via CLI")
@@ -73,7 +73,7 @@ public struct DockerClient: ContainerRuntime, Sendable {
                 return false
             }
         }
-
+        print("Checking docker availability via API")
         logger.debug("Checking Docker availability via API")
         let start = ContinuousClock.now
         do {
@@ -87,12 +87,16 @@ public struct DockerClient: ContainerRuntime, Sendable {
                     "apiVersion": version?.ApiVersion ?? "unknown",
                     "duration": "\(duration)",
                 ])
+              print("Docker is available")
             } else {
                 logger.warning("Docker check failed", metadata: [
                     "statusCode": "\(status.code)",
                     "duration": "\(duration)",
                 ])
+                print("Docker check failed")
+
             }
+            print("Checking docker availability via API. available is \(available)")
             return available
         } catch {
             let duration = ContinuousClock.now - start
@@ -100,6 +104,7 @@ public struct DockerClient: ContainerRuntime, Sendable {
                 "error": "\(error)",
                 "duration": "\(duration)",
             ])
+            print("Docker availability check threw error")
             return false
         }
     }
