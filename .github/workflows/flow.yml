@@ -16,8 +16,8 @@ concurrency:
 jobs:
   build-and-test:
     # Vapor suele ejecutarse en entornos Linux para servidor
-    # runs-on: ubuntu-latest
-    runs-on: macos-26
+    runs-on: ubuntu-latest
+    #runs-on: macos-26
 
 #    services:
 #      postgres:
@@ -55,20 +55,20 @@ jobs:
 #             echo ${{ github.actor }}
 
       # 2. Info about container
-      - name: Brew info container
-        run: brew info container
+      #- name: Brew info container
+      #  run: brew info container
 
       # 3. Update brew / Install docker CLI
-      - name: Instalar Docker CLI
-        run: |
-          brew update
-          # brew install docker
-          brew install docker colima
-          ls -la $(which colima)
-          #colima status
+      #- name: Instalar Docker CLI
+      #  run: |
+      #    brew update
+      #    # brew install docker
+      #    brew install docker colima
+      #    ls -la $(which colima)
+      #    #colima status
           #brew services start colima
           #colima start
-          /opt/homebrew/opt/colima/bin/colima start -f
+      #    /opt/homebrew/opt/colima/bin/colima start -f
           # docker context ls
 
       # 4. Info about Docker Engine, api version
@@ -87,10 +87,10 @@ jobs:
 
       # 4. Instala la herramienta Swiftly y la última versión de Swift TODO
       # Swiftly pone el ejecutable de 'swift' en el PATH del ejecutor
-      #  name: Install Swift
-      #  uses: vapor/swiftly-action@v0.2.1
-      #  with:
-      #    toolchain: latest
+      - name: Install Swift
+        uses: vapor/swiftly-action@v0.2.1
+        with:
+          toolchain: latest
 
       # 6. Compila el proyecto
       - name: Build Project
