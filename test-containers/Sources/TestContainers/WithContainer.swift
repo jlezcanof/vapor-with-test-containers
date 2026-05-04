@@ -64,7 +64,6 @@ func withContainer<T>(
     operation: @Sendable (Container) async throws -> T
 ) async throws -> T {
     logger.debug("Checking Docker availability")
-    print("Checking Docker availability")
     if !(await runtime.isAvailable()) {
         logger.error("Docker not available")
         throw TestContainersError.dockerNotAvailable("`docker` CLI not found or Docker engine not running.")

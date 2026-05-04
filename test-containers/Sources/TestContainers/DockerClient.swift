@@ -80,7 +80,9 @@ public struct DockerClient: ContainerRuntime, Sendable {
             print("invocando http client method get /version")
             let (status, body) = try await httpClient.get("/version")
             // tenemos que ver que versión devuelve, debería ser la 48
-            print("body is \(body)")
+            print("status is \(status)")
+            let dataBody = Data(bytes: body)
+            print("dataBody is \(Data())")
             
             let available = (200..<300).contains(status.code)
             let duration = ContinuousClock.now - start
