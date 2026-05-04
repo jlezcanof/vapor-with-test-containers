@@ -132,9 +132,13 @@ jobs:
              #export TESTCONTAINERS_RUN_DOCKERS_TESTS=1
              export TESTCONTAINERS_RUNTIME=docker
              # probando a crear socket intermedio que me loguee todo el tráfico
+             echo "sudo apt install socat"
              sudo apt install socat
+             echo "which socat"
              which socat
+             echo "socat -v ...."
              socat -v UNIX-LISTEN:/tmp/docker-debug.sock,fork UNIX-CONNECT:/var/run/docker.sock
+             echo "swift test..."
              swift test --filter VaporWithTestContainersTests 2>&1 | tee tests_output.txt
              if grep -q "suites failed" tests_output.txt; then
                echo "Fallaron los tests"
