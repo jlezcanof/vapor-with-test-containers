@@ -24,17 +24,18 @@ public func detectRuntime(preferred: ContainerRuntimeType? = nil) -> any Contain
 //    }
     
     if let preferred {
-        print("runtimeType = preferred")
+//        print("runtimeType = preferred")
         runtimeType = preferred
     } else if let envValue = ProcessInfo.processInfo.environment["TESTCONTAINERS_RUNTIME"],
               let fromEnv = ContainerRuntimeType(rawValue: envValue.lowercased()) {
-        print("runtimeType = fromEnv")
+//        print("runtimeType = fromEnv")
         runtimeType = fromEnv
     } else {
-        print("return DockerClient()")
+//        print("return DockerClient()")
         return DockerClient()
     }
 
+    print("runtimeType is \(runtimeType.rawValue)")
     switch runtimeType {
     case .docker:
         return DockerClient()
