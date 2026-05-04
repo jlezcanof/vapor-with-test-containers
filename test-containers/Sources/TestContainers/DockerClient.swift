@@ -51,7 +51,7 @@ public struct DockerClient: ContainerRuntime, Sendable {
     // MARK: - Docker Availability
 
     public func isAvailable() async -> Bool {
-        print("method cockerClient.isAvailable y tal ")
+        print("method dockerClient.isAvailable y tal ")
         guard let httpClient else {
             // CLI fallback
             logger.debug("Checking Docker availability via CLI")
@@ -77,7 +77,11 @@ public struct DockerClient: ContainerRuntime, Sendable {
         logger.debug("Checking Docker availability via API")
         let start = ContinuousClock.now
         do {
+            print("invocando http client method get /version")
             let (status, body) = try await httpClient.get("/version")
+            // tenemos que ver que versión devuelve, debería ser la 48
+            print("body is \(body)")
+            
             let available = (200..<300).contains(status.code)
             let duration = ContinuousClock.now - start
             if available {
@@ -94,7 +98,6 @@ public struct DockerClient: ContainerRuntime, Sendable {
                     "duration": "\(duration)",
                 ])
                 print("Docker check failed")
-
             }
             print("Checking docker availability via API. available is \(available)")
             return available
