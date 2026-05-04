@@ -83,8 +83,8 @@ jobs:
 
     steps:
       # 1. Version of swift
-      - name: Version of swift
-        run: swift --version
+      #- name: Version of swift
+      #  run: swift --version
 
 #      - name: Dump github context
 #        run: |

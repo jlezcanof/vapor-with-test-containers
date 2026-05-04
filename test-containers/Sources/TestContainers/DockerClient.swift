@@ -60,8 +60,10 @@ public struct DockerClient: ContainerRuntime, Sendable {
                 let output = try await runner.run(executable: dockerPath, arguments: ["info"])
                 let available = output.exitCode == 0
                 if available {
+                    print("Docker is available ")
                     logger.info("Docker is available")
                 } else {
+                    print("Docker check failed ")
                     logger.warning("Docker check failed")
                 }
                 return available
@@ -70,7 +72,6 @@ public struct DockerClient: ContainerRuntime, Sendable {
                 logger.error("Docker availability check threw error", metadata: ["error": "\(error)"])
                 return false
             }
-            print("DockerClient.isAvailable end ")
         }
 
         logger.debug("Checking Docker availability via API")
