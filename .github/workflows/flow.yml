@@ -117,9 +117,9 @@ jobs:
         uses: actions/cache@v5
         with:
           path: .build
-       #   key: ${{ runner.os }}-spm-${{ hasFiles(´Package.resolved´) }}
-       #   restore-keys: |
-       #     ${{ runner.os }}-spm-
+          key: ${{ runner.os }}-spm-${{ hasFiles(´Package.resolved´) }}
+          restore-keys: |
+            ${{ runner.os }}-spm-
 
       # 6. Compila el proyecto
       - name: Build Project
