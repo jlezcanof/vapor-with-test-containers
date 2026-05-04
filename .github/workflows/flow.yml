@@ -82,33 +82,12 @@ jobs:
 #          --health-retries 5
 
     steps:
-      # 1. Version of swift
-      #- name: Version of swift
-      #  run: swift --version
-
 #      - name: Dump github context
 #        run: |
 #	  echo ${{ github }}
 #             echo ${{ github.actor }}
 
-      # 2. Info about container
-      #- name: Brew info container
-      #  run: brew info container
-
-      # 3. Update brew / Install docker CLI
-      #- name: Instalar Docker CLI
-      #  run: |
-      #    brew update
-      #    # brew install docker
-      #    brew install docker colima
-      #    ls -la $(which colima)
-      #    #colima status
-          #brew services start colima
-          #colima start
-      #    /opt/homebrew/opt/colima/bin/colima start -f
-          # docker context ls
-
-      # 4. Info about Docker Engine, api version
+      # Info about Docker Engine, api version
       - name: Verificar version docker engine, api
         run: |
          ls -la $(which docker)
@@ -118,9 +97,9 @@ jobs:
          docker context ls
          #docker context inspect
       
-      # 5. Descarga el código del repositorio en el ejecutor
-      - name: Checkout code
-        uses: actions/checkout@v6
+      # Descarga el código del repositorio en el ejecutor
+      #- name: Checkout code
+      #  uses: actions/checkout@v6
 
       # 4. Instala la herramienta Swiftly y la última versión de Swift TODO
       # Swiftly pone el ejecutable de 'swift' en el PATH del ejecutor
@@ -128,6 +107,19 @@ jobs:
         uses: vapor/swiftly-action@v0.2.1
         with:
           toolchain: latest
+
+      # . Descarga el código del repositorio en el ejecutor
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      # Cache
+      - name: Use of cache
+        uses: actions/cache@v5
+        with:
+          path: .build
+          key: ${{ runner.os }}-spm-${{ hasFiles(´Package.resolved´) }}
+          restore-keys: |
+            ${{ runner.os }}-spm-
 
       # 6. Compila el proyecto
       - name: Build Project

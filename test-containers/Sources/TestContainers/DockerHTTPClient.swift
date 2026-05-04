@@ -29,7 +29,7 @@ struct DockerHTTPClient: Sendable {
     private let managed: ManagedHTTPClient
     private var httpClient: HTTPClient { managed.client }
     private let socketAuthority: String
-    private let apiVersion: String = "v1.43"// 1.54
+    private let apiVersion: String = "v1.54"// 1.54....v1.43
 
     init(socketPath: String = "/var/run/docker.sock") {
         self.managed = ManagedHTTPClient()
