@@ -51,7 +51,7 @@ public struct DockerClient: ContainerRuntime, Sendable {
     // MARK: - Docker Availability
 
     public func isAvailable() async -> Bool {
-        print("method dockerClient.isAvailable y tal ")
+        print("CockerClient.isAvailable")
         guard let httpClient else {
             // CLI fallback
             logger.debug("Checking Docker availability via CLI")
@@ -401,6 +401,7 @@ public struct DockerClient: ContainerRuntime, Sendable {
             body: bodyData,
             queryItems: queryParams
         )
+        print("runContainer")
         let createResponse: CreateContainerResponse = try httpClient.decodeResponse(
             CreateContainerResponse.self,
             status: createStatus,
@@ -445,21 +446,18 @@ public struct DockerClient: ContainerRuntime, Sendable {
             "name": request.name ?? "auto",
         ])
 
-        print("handleImagePullPolicy")
         try await handleImagePullPolicy(request)
 
-        print("buildCreateBody")
         let createBody = DockerContainerConfig.buildCreateBody(from: request)
-        print("buildQueryParams")
         let queryParams = DockerContainerConfig.buildQueryParams(from: request)
         let bodyData = try JSONEncoder().encode(createBody)
 
-        print("post containers/create")
         let (status, responseData) = try await httpClient.post(
             "/containers/create",
             body: bodyData,
             queryItems: queryParams
         )
+        print("createContainer")
         let response: CreateContainerResponse = try httpClient.decodeResponse(
             CreateContainerResponse.self,
             status: status,
@@ -652,7 +650,7 @@ public struct DockerClient: ContainerRuntime, Sendable {
             let output = try await runner.run(executable: dockerPath, arguments: args)
             return output.exitCode
         }
-
+        print("exec")
         // Create exec instance
         let createBody = ExecCreateRequest(
             AttachStdout: false,
@@ -746,6 +744,7 @@ public struct DockerClient: ContainerRuntime, Sendable {
             "/containers/\(id)/exec",
             body: createData
         )
+        print("exec")
         let execResponse: ExecCreateResponse = try httpClient.decodeResponse(
             ExecCreateResponse.self,
             status: createStatus,
