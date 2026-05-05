@@ -112,7 +112,8 @@ struct DockerHTTPClient: Sendable {
             request.headers.replaceOrAdd(name: "Content-Type", value: "application/json")
             request.body = .bytes(body)
         }
-//        request.headers.add(name: "Host", value: "localhost")
+        // TODO 05-05-2026
+        request.headers.add(name: "Host", value: "localhost")
         let response = try await httpClient.execute(request, timeout: timeout)
         let responseBody = try await response.body.collect(upTo: 10 * 1024 * 1024)
         // Data(buffer: responseBody)
