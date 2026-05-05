@@ -202,6 +202,7 @@ struct DockerHTTPClient: Sendable {
     ) throws -> T {
         guard (200..<300).contains(status.code) else {
             let message = parseErrorMessage(from: body)
+            print("DockerHTTPClient.decodeResponse, message is \(message)")
             throw TestContainersError.apiError(
                 statusCode: Int(status.code),
                 message: message
@@ -214,6 +215,7 @@ struct DockerHTTPClient: Sendable {
     func requireSuccess(status: HTTPResponseStatus, body: Data) throws {
         guard (200..<300).contains(status.code) else {
             let message = parseErrorMessage(from: body)
+            print("DockerHTTPClient.requireSuccess, message is \(message)")
             throw TestContainersError.apiError(
                 statusCode: Int(status.code),
                 message: message
