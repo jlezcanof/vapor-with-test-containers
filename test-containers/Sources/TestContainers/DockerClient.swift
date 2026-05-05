@@ -445,12 +445,16 @@ public struct DockerClient: ContainerRuntime, Sendable {
             "name": request.name ?? "auto",
         ])
 
+        print("handleImagePullPolicy")
         try await handleImagePullPolicy(request)
 
+        print("buildCreateBody")
         let createBody = DockerContainerConfig.buildCreateBody(from: request)
+        print("buildQueryParams")
         let queryParams = DockerContainerConfig.buildQueryParams(from: request)
         let bodyData = try JSONEncoder().encode(createBody)
 
+        print("post containers/create")
         let (status, responseData) = try await httpClient.post(
             "/containers/create",
             body: bodyData,
