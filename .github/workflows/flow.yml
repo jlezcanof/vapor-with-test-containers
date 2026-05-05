@@ -137,8 +137,8 @@ jobs:
              echo "which socat"
              which socat
              echo "socat -v ...."
-             #socat -v UNIX-LISTEN:/tmp/docker-debug.sock,fork UNIX-CONNECT:/var/run/docker.sock 2>/tmp/docker-traffic.log &
-             socat fork UNIX-CONNECT:/var/run/docker.sock 2>/tmp/docker-traffic.log &
+             socat -v UNIX-LISTEN:/tmp/docker-debug.sock,fork UNIX-CONNECT:/var/run/docker.sock 2>/tmp/docker-traffic.log &
+             #socat fork UNIX-CONNECT:/var/run/docker.sock 2>/tmp/docker-traffic.log &
              SOCAT_PID=$!
              echo "swift test..."
              swift test --filter VaporWithTestContainersTests 2>&1 | tee tests_output.txt
