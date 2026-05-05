@@ -324,6 +324,7 @@ public struct DockerClient: ContainerRuntime, Sendable {
         let encodedImage = image.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? image
         let (status, body) = try await httpClient.get("/images/\(encodedImage)/json")
 
+        print("inspectImage")
         guard (200..<300).contains(status.code) else {
             let message = String(data: body, encoding: .utf8) ?? "Unknown error"
             throw TestContainersError.apiError(statusCode: Int(status.code), message: message)
@@ -1132,6 +1133,7 @@ public struct DockerClient: ContainerRuntime, Sendable {
 
         let (status, body) = try await httpClient.get("/containers/\(id)/json")
 
+        print("inspect")
         guard (200..<300).contains(status.code) else {
             let message = String(data: body, encoding: .utf8) ?? "Unknown error"
             throw TestContainersError.apiError(statusCode: Int(status.code), message: message)

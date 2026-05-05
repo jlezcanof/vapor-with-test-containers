@@ -155,6 +155,7 @@ struct DockerHTTPClient: Sendable {
         print("postStreaming...request.headers \(request.headers)")
         let response = try await httpClient.execute(request, timeout: timeout)
         let responseBody = try await response.body.collect(upTo: 100 * 1024 * 1024) // 100 MB for streaming
+        print("postStreaming. status is \(response.status)")
         // Data(buffer: responseBody)
         return (response.status, Data(responseBody.readableBytesView))
     }
