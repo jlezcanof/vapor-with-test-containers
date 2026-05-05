@@ -24,7 +24,7 @@ struct RoomsWeb_TestContainers {
 //        print("init detectRuntime")
         let dockerRuntime = detectRuntime(preferred: .docker)
 //        print("end detectRuntime")
-        
+                
         let request = ContainerRequest(image: "redis:7")
             .withExposedPort(6379)
             .waitingFor(.tcpPort(6379))
