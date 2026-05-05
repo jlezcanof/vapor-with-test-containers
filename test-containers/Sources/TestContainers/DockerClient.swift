@@ -212,6 +212,7 @@ public struct DockerClient: ContainerRuntime, Sendable {
             // CLI fallback
             var args = ["image", "inspect"]
             if let platform { args += ["--platform", platform] }
+            print("imageExists. args is \(args)")
             args.append(image)
             do {
                 let output = try await runner.run(executable: dockerPath, arguments: args)
@@ -245,8 +246,8 @@ public struct DockerClient: ContainerRuntime, Sendable {
                 args += ["--platform", platform]
             }
             args.append(image)
-            print("dockerPath is \(dockerPath)")
-            print("environment is \(environment)")
+            print("pullImage. dockerPath is \(dockerPath)")
+            print("pullImage. environment is \(environment)")
             let output = try await runner.run(executable: dockerPath, arguments: args, environment: environment)
             if output.exitCode != 0 {
                 throw TestContainersError.imagePullFailed(

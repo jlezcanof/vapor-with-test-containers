@@ -65,9 +65,6 @@ struct DockerHTTPClient: Sendable {
     ) async throws -> (status: HTTPResponseStatus, body: Data) {
         var request = HTTPClientRequest(url: url(for: path, queryItems: queryItems))
         request.method = .GET
-//        print("url is \(String(describing: url))")
-//        print("queryItems is \(String(describing: queryItems))")
-//        print("request.header is \(request.headers)")
         // TODO esto es solo una prueba
         request.headers.add(name: "Host", value: "localhost")
 //        print("before add header host, request.header is \(request.headers)")
@@ -154,6 +151,8 @@ struct DockerHTTPClient: Sendable {
             request.headers.replaceOrAdd(name: "Content-Type", value: "application/json")
             request.body = .bytes(body)
         }
+        request.headers.add(name: "Host", value: "localhost")
+        print("postStreaming...request.headers \(request.headers)")
         let response = try await httpClient.execute(request, timeout: timeout)
         let responseBody = try await response.body.collect(upTo: 100 * 1024 * 1024) // 100 MB for streaming
         // Data(buffer: responseBody)
