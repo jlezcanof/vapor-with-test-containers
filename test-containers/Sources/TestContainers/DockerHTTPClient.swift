@@ -67,7 +67,6 @@ struct DockerHTTPClient: Sendable {
         request.method = .GET
         // TODO esto es solo una prueba
         request.headers.add(name: "Host", value: "localhost")
-//        print("before add header host, request.header is \(request.headers)")
         let response = try await httpClient.execute(request, timeout: timeout)
         print("response is \(response)")
         let body = try await response.body.collect(upTo: 10 * 1024 * 1024) // 10 MB limit
@@ -92,6 +91,8 @@ struct DockerHTTPClient: Sendable {
             request.headers.replaceOrAdd(name: "Content-Type", value: "application/json")
             request.body = .bytes(body)
         }
+        // TODO esto es solo una prueba
+        request.headers.add(name: "Host", value: "localhost")
         let response = try await httpClient.execute(request, timeout: timeout)
         let responseBody = try await response.body.collect(upTo: 10 * 1024 * 1024)
         // Data(buffer: responseBody)
