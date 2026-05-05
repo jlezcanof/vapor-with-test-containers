@@ -65,7 +65,11 @@ struct DockerHTTPClient: Sendable {
     ) async throws -> (status: HTTPResponseStatus, body: Data) {
         var request = HTTPClientRequest(url: url(for: path, queryItems: queryItems))
         request.method = .GET
+        print("url is \(url)")
+        print("queryItems is \(queryItems)")
+        print("request.header is \(request.headers)")
         let response = try await httpClient.execute(request, timeout: timeout)
+        print("response is \(response)")
         let body = try await response.body.collect(upTo: 10 * 1024 * 1024) // 10 MB limit
         // Data(buffer: body)
         return (response.status, Data(body.readableBytesView))
