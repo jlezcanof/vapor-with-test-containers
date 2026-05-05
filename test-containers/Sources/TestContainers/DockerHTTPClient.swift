@@ -173,7 +173,8 @@ struct DockerHTTPClient: Sendable {
     ) async throws -> HTTPClientResponse {
         var request = HTTPClientRequest(url: url(for: path, queryItems: queryItems))
         request.method = .GET
-//        request.headers.add(name: "Host", value: "localhost")
+        // TODO prueba 05-05-2026 15:10
+        request.headers.add(name: "Host", value: "localhost")
         return try await httpClient.execute(request, timeout: timeout)
     }
 
