@@ -29,7 +29,7 @@ struct DockerHTTPClient: Sendable {
     private let managed: ManagedHTTPClient
     private var httpClient: HTTPClient { managed.client }
     private let socketAuthority: String
-    private let apiVersion: String = "v1.54"// 1.54....v1.43
+    private let apiVersion: String = "v1.43"// v1.48
 
     init(socketPath: String = "/var/run/docker.sock") {
         self.managed = ManagedHTTPClient()
@@ -65,12 +65,12 @@ struct DockerHTTPClient: Sendable {
     ) async throws -> (status: HTTPResponseStatus, body: Data) {
         var request = HTTPClientRequest(url: url(for: path, queryItems: queryItems))
         request.method = .GET
-        print("url is \(String(describing: url))")
-        print("queryItems is \(String(describing: queryItems))")
-        print("request.header is \(request.headers)")
+//        print("url is \(String(describing: url))")
+//        print("queryItems is \(String(describing: queryItems))")
+//        print("request.header is \(request.headers)")
         // TODO esto es solo una prueba
         request.headers.add(name: "Host", value: "localhost")
-        print("before add header host, request.header is \(request.headers)")
+//        print("before add header host, request.header is \(request.headers)")
         let response = try await httpClient.execute(request, timeout: timeout)
         print("response is \(response)")
         let body = try await response.body.collect(upTo: 10 * 1024 * 1024) // 10 MB limit
