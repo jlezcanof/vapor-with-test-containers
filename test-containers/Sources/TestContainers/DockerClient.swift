@@ -32,7 +32,6 @@ public struct DockerClient: ContainerRuntime, Sendable {
         dockerPath: String = "docker",
         logger: TCLogger = .null
     ) {
-        print("Dockerclient.init")
         self.httpClient = DockerHTTPClient(socketPath: socketPath)
         self.dockerPath = dockerPath
         self.logger = logger
@@ -74,14 +73,12 @@ public struct DockerClient: ContainerRuntime, Sendable {
                 return false
             }
         }
-        print("httpClient no es nulo por lo que Checking docker availability via API")
+        print("httpClient no es nulo por lo que podrems ver la disponibilidad ´Checking docker availability via API´")
         logger.debug("Checking Docker availability via API")
         let start = ContinuousClock.now
         do {
             print("invocando http client method get /version")
-//            print ("httpclient.version is \(httpClient.)")
             let (status, body) = try await httpClient.get("/version")
-            // tenemos que ver que versión devuelve, debería ser la 48
             print("status is \(status)")
             
             let available = (200..<300).contains(status.code)
@@ -243,8 +240,13 @@ public struct DockerClient: ContainerRuntime, Sendable {
         guard let httpClient else {
             // CLI fallback
             var args = ["pull"]
-            if let platform { args += ["--platform", platform] }
+            if let platform {
+                print("platform is \(platform)")
+                args += ["--platform", platform]
+            }
             args.append(image)
+            print("dockerPath is \(dockerPath)")
+            print("environment is \(environment)")
             let output = try await runner.run(executable: dockerPath, arguments: args, environment: environment)
             if output.exitCode != 0 {
                 throw TestContainersError.imagePullFailed(
