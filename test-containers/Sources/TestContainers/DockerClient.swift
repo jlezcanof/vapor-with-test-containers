@@ -477,6 +477,7 @@ public struct DockerClient: ContainerRuntime, Sendable {
 
     /// Start an existing container.
     public func startContainer(id: String) async throws {
+        print("startContainer id exists \(id)")
         guard let httpClient else {
             _ = try await runDocker(["start", id])
             return
