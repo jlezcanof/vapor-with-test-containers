@@ -128,7 +128,9 @@ struct DockerHTTPClient: Sendable {
     ) async throws -> (status: HTTPResponseStatus, body: Data) {
         var request = HTTPClientRequest(url: url(for: path, queryItems: queryItems))
         request.method = .DELETE
-//        request.headers.add(name: "Host", value: "localhost")
+        print("delete...path \(path)")
+        // TODO 05-05-2026
+        request.headers.add(name: "Host", value: "localhost")
         let response = try await httpClient.execute(request, timeout: timeout)
         let body = try await response.body.collect(upTo: 10 * 1024 * 1024)
         //Data(buffer: body)
