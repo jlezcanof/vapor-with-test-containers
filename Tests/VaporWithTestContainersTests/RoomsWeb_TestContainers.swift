@@ -8,7 +8,7 @@ import Testing
 import TestContainers
 import Foundation
 import FluentPostgresDriver
-import Logging
+//import Logging
 
 @Suite("RoomsWeb_TestContainers", .serialized, .tags(.testContainers))
 struct RoomsWeb_TestContainers {
@@ -22,11 +22,11 @@ struct RoomsWeb_TestContainers {
     
     @Test func pruebaRedisExample() async throws {
         
-        LoggingSystem.bootstrap { label in
-            var handler = StreamLogHandler.standardOutput(label: label)
-            handler.logLevel = .trace
-            return handler
-        }
+//        LoggingSystem.bootstrap { label in
+//            var handler = StreamLogHandler.standardOutput(label: label)
+//            handler.logLevel = .trace
+//            return handler
+//        }
         
         let dockerRuntime = detectRuntime(preferred: .docker)
                 
