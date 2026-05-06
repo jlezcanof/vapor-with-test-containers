@@ -178,7 +178,7 @@ struct DockerHTTPClient: Sendable {
         var request = HTTPClientRequest(url: url(for: path, queryItems: queryItems))
         request.method = .GET
         // TODO prueba 05-05-2026 15:10
-        request.headers.add(name: "Host", value: "localhost")
+//        request.headers.add(name: "Host", value: "localhost")
         print("getStream...request.headers \(request.headers)")
         return try await httpClient.execute(request, timeout: timeout)
     }
@@ -199,7 +199,7 @@ struct DockerHTTPClient: Sendable {
             request.body = .bytes(body)
         }
         // TODO prueba 05-05-2026 15:10
-//        request.headers.add(name: "Host", value: "localhost")
+        request.headers.add(name: "Host", value: "localhost")
         return try await httpClient.execute(request, timeout: timeout)
     }
 
