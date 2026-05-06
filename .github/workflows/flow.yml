@@ -156,13 +156,14 @@ jobs:
              docker images
              echo "listado de contenedores"
              docker ps
-             #docker image ls | tail -n2 +2 | awk '{print $2}' | while read -r image_id: do
-             docker image ls --format "{${.ID}}" | while read -r id: do
+             #docker image ls | tail -n2 +2 | awk '{print $2}' | while read -r image_id; do
+             #docker image ls --format "{${.ID}}" | while read -r id; do
                #echo "Eliminando $image_id"
                #docker rmi "$image_id"
-               echo "Deleting $id"
-               docker rmi "$id"
-             done 
+               #echo "Deleting $id"
+               #docker rmi "$id"
+             #done
+             docker image ls --format "{{.ID}}" | xargs -r docker rmi 
              echo "Todos los tests pasaron satisfactoriamente"
              # Es otra forma de lanzar los tests, comprobando su resultado satisfactorio o no
   security-review:
