@@ -29,9 +29,9 @@ struct DockerHTTPClient: Sendable {
     private let managed: ManagedHTTPClient
     private var httpClient: HTTPClient { managed.client }
     private let socketAuthority: String
-    private let apiVersion: String = "v1.48"// v1.43
+    private let apiVersion: String = "v1.54"// v1.43...v1.48 con este funciona en githubaction
 
-    init(socketPath: String = "/var/run/docker.sock") {
+    init(socketPath: String = "/Users/lezcanin/.docker/run/docker.sock") {//   /var/run/docker.sock
         self.managed = ManagedHTTPClient()
         // Percent-encode the socket path for use in http+unix:// URLs.
         // '/' must become %2F so the URL parser treats the whole path as the authority.
@@ -199,7 +199,7 @@ struct DockerHTTPClient: Sendable {
             request.body = .bytes(body)
         }
         // TODO prueba 05-05-2026 15:10
-        request.headers.add(name: "Host", value: "localhost")
+//        request.headers.add(name: "Host", value: "localhost")
         return try await httpClient.execute(request, timeout: timeout)
     }
 
