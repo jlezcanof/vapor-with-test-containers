@@ -129,8 +129,6 @@ jobs:
       # Nota: El comando 'swift test --filter' es el estándar de Swift Package Manager
       - name: Run VaporWithTestContainersTests
         run: |
-             #export TESTCONTAINERS_RUN_DOCKERS_TESTS=1
-             export TESTCONTAINERS_RUNTIME=docker
              # probando a crear socket intermedio que me loguee todo el tráfico
              echo "sudo apt install socat"
              sudo apt install socat
@@ -140,8 +138,10 @@ jobs:
              socat -v UNIX-LISTEN:/tmp/docker-debug.sock,fork UNIX-CONNECT:/var/run/docker.sock 2>/tmp/docker-traffic.log &
              #socat fork UNIX-CONNECT:/var/run/docker.sock 2>/tmp/docker-traffic.log &
              SOCAT_PID=$!
-             echo "swift test..."
-             swift test --filter VaporWithTestContainersTests 2>&1 | tee tests_output.txt
+             #echo "swift test..."
+             #swift test --filter VaporWithTestContainersTests 2>&1 | tee tests_output.txt
+             export TESTCONTAINERS_RUNTIME=docker
+             TESTCONTAINERS_RUN_DOCKER_TESTS=1 swift test --filter VaporWithTestContainersTests
              kill $SOCAT_PID
              cat /tmp/docker-traffic.log
              if grep -q "suites failed" tests_output.txt; then
@@ -152,6 +152,10 @@ jobs:
                echo "Error fatal grave"
                exit 1
              fi
+             echo "vemos las imagenes que existen en docker"
+             docker images
+             echo "listado de contenedores"
+             docker ps
              echo "Todos los tests pasaron satisfactoriamente"
              # Es otra forma de lanzar los tests, comprobando su resultado satisfactorio o no
   security-review:
