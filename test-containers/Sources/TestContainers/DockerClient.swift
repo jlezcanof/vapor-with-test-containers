@@ -28,7 +28,7 @@ public struct DockerClient: ContainerRuntime, Sendable {
 
     /// Create a DockerClient that communicates with the Docker Engine API over a Unix socket.
     public init(// unix:///var/run/docker.sock source original
-        socketPath: String = "unix:///var/run/docker.sock", // /tmp/docker-debug.sock
+        socketPath: String = "/tmp/docker-debug.sock", //unix:///var/run/docker.sock
         //unix:///Users/lezcanin/.docker/run/docker.sock
         //....con esto forzamos su funcionamiento ""
         dockerPath: String = "docker", //docker /usr/local/bin/docker
