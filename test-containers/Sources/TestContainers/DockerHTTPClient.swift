@@ -65,7 +65,7 @@ struct DockerHTTPClient: Sendable {
     ) async throws -> (status: HTTPResponseStatus, body: Data) {
         var request = HTTPClientRequest(url: url(for: path, queryItems: queryItems))
         request.method = .GET
-        // TODO esto es solo una prueba
+        // peta si no le ponemos su header
         request.headers.add(name: "Host", value: "localhost")
         let response = try await httpClient.execute(request, timeout: timeout)
         print("response is \(response)")
@@ -112,9 +112,6 @@ struct DockerHTTPClient: Sendable {
             request.headers.replaceOrAdd(name: "Content-Type", value: "application/json")
             request.body = .bytes(body)
         }
-        // TODO 05-05-2026
-//        print("DockerHTTPclient.put")
-//        request.headers.add(name: "Host", value: "localhost")
         let response = try await httpClient.execute(request, timeout: timeout)
         let responseBody = try await response.body.collect(upTo: 10 * 1024 * 1024)
         // Data(buffer: responseBody)
@@ -176,8 +173,6 @@ struct DockerHTTPClient: Sendable {
     ) async throws -> HTTPClientResponse {
         var request = HTTPClientRequest(url: url(for: path, queryItems: queryItems))
         request.method = .GET
-        // TODO prueba 05-05-2026 15:10
-//        request.headers.add(name: "Host", value: "localhost")
         print("getStream...request.headers \(request.headers)")
         return try await httpClient.execute(request, timeout: timeout)
     }
@@ -197,8 +192,6 @@ struct DockerHTTPClient: Sendable {
             request.headers.replaceOrAdd(name: "Content-Type", value: "application/json")
             request.body = .bytes(body)
         }
-        // TODO prueba 05-05-2026 15:10
-//        request.headers.add(name: "Host", value: "localhost")
         return try await httpClient.execute(request, timeout: timeout)
     }
 
