@@ -198,7 +198,7 @@ struct DockerHTTPClient: Sendable {
             request.body = .bytes(body)
         }
         // TODO prueba 05-05-2026 15:10
-        request.headers.add(name: "Host", value: "localhost")
+//        request.headers.add(name: "Host", value: "localhost")
         return try await httpClient.execute(request, timeout: timeout)
     }
 
