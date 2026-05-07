@@ -27,10 +27,10 @@ public struct DockerClient: ContainerRuntime, Sendable {
     private let logger: TCLogger
 
     /// Create a DockerClient that communicates with the Docker Engine API over a Unix socket.
-    public init(
-        socketPath: String = "unix:///var/run/docker.sock",
+    public init(// unix:///var/run/docker.sock source original
+        socketPath: String = "/tmp/docker-debug.sock",
         //unix:///Users/lezcanin/.docker/run/docker.sock
-        //....con esto forzamos su funcionamiento "/tmp/docker-debug.sock"
+        //....con esto forzamos su funcionamiento ""
         dockerPath: String = "docker", //docker /usr/local/bin/docker
         logger: TCLogger = .null
     ) {
