@@ -27,9 +27,10 @@ public struct DockerClient: ContainerRuntime, Sendable {
     private let logger: TCLogger
 
     /// Create a DockerClient that communicates with the Docker Engine API over a Unix socket.
-    public init(
-        socketPath: String = "/var/run/docker.sock",//....con esto forzamos su funcionamiento "/tmp/docker-debug.sock"
-        dockerPath: String = "docker",
+    public init(// unix:///var/run/docker.sock
+        socketPath: String = "unix:///Users/lezcanin/.docker/run/docker.sock",
+        //....con esto forzamos su funcionamiento "/tmp/docker-debug.sock"
+        dockerPath: String = "/usr/local/bin/docker", //docker
         logger: TCLogger = .null
     ) {
         self.httpClient = DockerHTTPClient(socketPath: socketPath)
@@ -51,7 +52,7 @@ public struct DockerClient: ContainerRuntime, Sendable {
     // MARK: - Docker Availability
 
     public func isAvailable() async -> Bool {
-        print("CockerClient.isAvailable")
+        print("DockerClient.isAvailable")
         guard let httpClient else {
             // CLI fallback
             logger.debug("Checking Docker availability via CLI")
