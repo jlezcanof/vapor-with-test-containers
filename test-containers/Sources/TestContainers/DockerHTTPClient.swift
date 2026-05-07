@@ -129,9 +129,8 @@ struct DockerHTTPClient: Sendable {
     ) async throws -> (status: HTTPResponseStatus, body: Data) {
         var request = HTTPClientRequest(url: url(for: path, queryItems: queryItems))
         request.method = .DELETE
-//        print("delete...path \(path)")
-        // TODO 05-05-2026
-//        request.headers.add(name: "Host", value: "localhost")
+        print("delete...path \(path)")
+        request.headers.add(name: "Host", value: "localhost")
         let response = try await httpClient.execute(request, timeout: timeout)
         let body = try await response.body.collect(upTo: 10 * 1024 * 1024)
         //Data(buffer: body)
@@ -158,7 +157,7 @@ struct DockerHTTPClient: Sendable {
             request.headers.replaceOrAdd(name: "Content-Type", value: "application/json")
             request.body = .bytes(body)
         }
-        request.headers.add(name: "Host", value: "localhost")
+//        request.headers.add(name: "Host", value: "localhost")
         print("postStreaming...request.headers \(request.headers)")
         let response = try await httpClient.execute(request, timeout: timeout)
         let responseBody = try await response.body.collect(upTo: 100 * 1024 * 1024) // 100 MB for streaming
