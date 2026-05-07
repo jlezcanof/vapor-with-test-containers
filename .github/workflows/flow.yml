@@ -139,9 +139,9 @@ jobs:
              #socat fork UNIX-CONNECT:/var/run/docker.sock 2>/tmp/docker-traffic.log &
              SOCAT_PID=$!
              #echo "swift test..."
-             #swift test --filter VaporWithTestContainersTests 2>&1 | tee tests_output.txt
+             swift test --filter VaporWithTestContainersTests 2>&1 | tee tests_output.txt
              export TESTCONTAINERS_RUNTIME=docker
-             TESTCONTAINERS_RUN_DOCKER_TESTS=1 swift test --filter VaporWithTestContainersTests
+             #TESTCONTAINERS_RUN_DOCKER_TESTS=1 swift test --filter VaporWithTestContainersTests
              kill $SOCAT_PID
              cat /tmp/docker-traffic.log
              if grep -q "suites failed" tests_output.txt; then
