@@ -14,11 +14,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build-and-test-in-macos-26:
-    runs-on: macos-26
-    steps:
-      - name: Version of swift
-        run: swift --version
+  #build-and-test-in-macos-26:
+  #  runs-on: macos-26
+  #  steps:
+  #    - name: Version of swift
+  #      run: swift --version
 
 #      - name: Dump github context
 #        run: |
@@ -26,8 +26,8 @@ jobs:
 #             echo ${{ github.actor }}
 
   # 2. Info about container
-      - name: Brew info container
-        run: brew info container
+  #    - name: Brew info container
+  #      run: brew info container
 
 # 3. Update brew / Install docker CLI
       #- name: Instalar Docker CLI
@@ -42,19 +42,19 @@ jobs:
       #    /opt/homebrew/opt/colima/bin/colima start -f
           # docker context ls
 
-       - name: Checkout code
-         uses: action/checkout@v6
+   #    - name: Checkout code
+   #      uses: action/checkout@v6
 
-       - name: Use of cache
-         uses: actions/cache@v5
-         with:
-          path: .build
-          key: ${{ runner.os }}-spm-${{ hashFiles('Package.resolved') }}
-          restore-keys: |
-            ${{ runner.os }}-spm-
+    #   - name: Use of cache
+    #     uses: actions/cache@v5
+    #     with:
+    #      path: .build
+    #      key: ${{ runner.os }}-spm-${{ hashFiles('Package.resolved') }}
+    #      restore-keys: |
+    #        ${{ runner.os }}-spm-
 
-       - name: Compila el proyecto
-         run: swift build
+    #   - name: Compila el proyecto
+    #     run: swift build
 
        #- name: Run VaporWithTestsInAppleContainers
        #  run: |
