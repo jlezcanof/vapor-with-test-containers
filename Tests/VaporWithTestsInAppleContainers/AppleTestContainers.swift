@@ -43,13 +43,13 @@ struct AppleTestContainers {
             return
         }
         
-        let dockerRuntime = detectRuntime(preferred: .appleContainer)
+        let appleContainer = detectRuntime(preferred: .appleContainer)
                 
         let request = ContainerRequest(image: "redis:7")
             .withExposedPort(6379)
             .waitingFor(.tcpPort(6379))
         
-        try await withContainer(request, runtime: dockerRuntime) { container in
+        try await withContainer(request, runtime: appleContainer) { container in
             let port = try await container.hostPort(6379)
             #expect(port > 0)
         }

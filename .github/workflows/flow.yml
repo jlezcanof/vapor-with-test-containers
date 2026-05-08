@@ -49,7 +49,7 @@ jobs:
 
       - name: Run VaporWithTestsInAppleContainers
         run: |
-              TESTCONTAINERS_RUN_APPLE_CONTAINER_TEST=1 swift test --filter VaporWithTestsINAppleContainers
+              TESTCONTAINERS_RUN_APPLE_CONTAINER_TESTS=1 swift test --filter VaporWithTestsINAppleContainers
               #echo "Todos los tests del target VaporWithTestsInApplecontainer pasaron satisfactoriamente"
               swift test --filter VaporWithTestsInAppleContainers 2>&1 | tee tests_output.txt
 
