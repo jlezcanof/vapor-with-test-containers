@@ -26,8 +26,8 @@ jobs:
       # 2. Info about container
       - name: Brew info about container
         run: |
-              brew install --cask container
-              bre info container 
+              brew install∑ container
+              brew info container 
 
       - name: Checkout code
         uses: actions/checkout@v6
