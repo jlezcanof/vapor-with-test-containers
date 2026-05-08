@@ -1,7 +1,5 @@
 name: 1 - Workflow complete Swift Vapor CI/Security review
 
-#env:
-  #TESTCONTAINERS_RUN_DOCKER_TESTS : "1"
 # El flujo se activa al hacer push o abrir un PR en la rama principal
 on:
   push:
@@ -14,11 +12,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  #build-and-test-in-macos-26:
-  #  runs-on: macos-26
-  #  steps:
-  #    - name: Version of swift
-  #      run: swift --version
+  build-and-test-in-macos-26:
+    runs-on: macos-26
+    steps:
+      - name: Version of swift
+        run: swift --version
 
 #      - name: Dump github context
 #        run: |
