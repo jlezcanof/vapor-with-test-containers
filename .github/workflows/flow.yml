@@ -60,6 +60,9 @@ jobs:
               #echo "Todos los tests del target VaporWithTestsInApplecontainer pasaron satisfactoriamente"
               # swift test --filter VaporWithTestsInAppleContainers 2>&1 | tee tests_output.txt
 
+      - name: Listado de imagenes de Apple Container
+        run: container image ls
+
   build-and-test:
     # Vapor suele ejecutarse en entornos Linux para servidor
     runs-on: ubuntu-latest
