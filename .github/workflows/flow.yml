@@ -25,20 +25,9 @@ jobs:
 
       # 2. Info about container
       - name: Brew info about container
-        run: brew info container
-
-# 3. Update brew / Install docker CLI
-      #- name: Instalar Docker CLI
-      #  run: |
-      #    brew update
-      #    # brew install docker
-      #    brew install docker colima
-      #    ls -la $(which colima)
-      #    #colima status
-          #brew services start colima
-          #colima start
-      #    /opt/homebrew/opt/colima/bin/colima start -f
-          # docker context ls
+        run: |
+              brew install --cask container
+              bre info container 
 
       - name: Checkout code
         uses: actions/checkout@v6
