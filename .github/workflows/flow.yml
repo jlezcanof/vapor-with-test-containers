@@ -40,8 +40,8 @@ jobs:
       #    /opt/homebrew/opt/colima/bin/colima start -f
           # docker context ls
 
- #     - name: Checkout code
- #       uses: action/checkout@v6
+      - name: Checkout code
+        uses: action/checkout@v6
 
 #      - name: Use of cache
 #        uses: actions/cache@v5
