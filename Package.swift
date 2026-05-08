@@ -38,7 +38,15 @@ let package = Package(
                 .product(name: "TestContainers", package: "test-containers"),
             ],
             swiftSettings: swiftSettings
-        )
+        ),
+        .testTarget(name: "VaporWithTestsInAppleContainers",
+                    dependencies: [
+                        .target(name: "VaporWithTestContainers"),
+                        .product(name: "VaporTesting", package: "vapor"),
+                        .product(name: "TestContainers", package: "test-containers"),
+                    ],
+                    swiftSettings: swiftSettings
+                   )
     ]
 )
 

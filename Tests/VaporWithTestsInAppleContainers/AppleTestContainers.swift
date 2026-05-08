@@ -28,7 +28,7 @@ struct AppleTestContainers {
     
     @Test func proofRedis() async throws {
 
-        let optedIn = ProcessInfo.processInfo.environment["TESTCONTAINERS_RUN_DOCKER_TESTS"] == "1"
+        let optedIn = ProcessInfo.processInfo.environment["TESTCONTAINERS_RUN_APPLE_CONTAINER_TESTS"] == "1"
         guard optedIn else {
             print("no existe esa variable de entorno")
             return
