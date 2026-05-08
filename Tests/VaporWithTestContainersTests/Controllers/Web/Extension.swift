@@ -7,7 +7,9 @@
 import Testing
 
 extension Tag {
-    @Tag static var testContainers: Self
+    @Tag static var testContainers: Self//docker
+    @Tag static var appleContainers: Self
+
 }
 
 
@@ -17,4 +19,6 @@ extension Tag {
 
 extension Tag.vapor_with_test_containers {
     @Tag static var testContainers: Tag
+    @Tag static var appleContainers: Tag
+
 }
