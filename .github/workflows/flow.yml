@@ -36,22 +36,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
 
-      - name: Use of cache
-        uses: actions/cache@v5
-            with:
-            path: .build
-            key: ${{ runner.os }}-spm-${{ hashFiles('Package.resolved') }}
-            restore-keys: |
-              ${{ runner.os }}-spm-
+     # - name: Use of cache
+     #   uses: actions/cache@v5
+     #       with:
+     #       path: .build
+     #       key: ${{ runner.os }}-spm-${{ hashFiles('Package.resolved') }}
+     #       restore-keys: |
+     #         ${{ runner.os }}-spm-
 
       - name: Compila el proyectooooo
         run: swift build
 
-       #- name: Run VaporWithTestsInAppleContainers
-       #  run: |
-              #TESTCONTAINERS_RUN_APPLE_CONTAINER_TEST=1 swift test --filter VaporWithTestsINAppleContainers
+      - name: Run VaporWithTestsInAppleContainers
+        run: |
+              TESTCONTAINERS_RUN_APPLE_CONTAINER_TEST=1 swift test --filter VaporWithTestsINAppleContainers
               #echo "Todos los tests del target VaporWithTestsInApplecontainer pasaron satisfactoriamente"
-              # swift test --filter VaporWithTestsInAppleContainers 2>&1 | tee tests_output.txt
+              swift test --filter VaporWithTestsInAppleContainers 2>&1 | tee tests_output.txt
 
       - name: Listado de imagenes de Apple Container
         run: container image ls
