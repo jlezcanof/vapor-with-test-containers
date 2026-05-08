@@ -4,20 +4,15 @@
 //
 //  Created by Jose Manuel Lezcano Fresno on 29/04/2026.
 
+//@testable import VaporWithTestContainers
 import Testing
 import TestContainers
 import Foundation
 import FluentPostgresDriver
 
 
-//@testable import VaporWithTestContainers
 //import Logging
 
-//        LoggingSystem.bootstrap { label in
-//            var handler = StreamLogHandler.standardOutput(label: label)
-//            handler.logLevel = .trace
-//            return handler
-//        }
 
 extension Tag {
     @Tag static var appleContainers: Self
@@ -48,7 +43,7 @@ struct AppleTestContainers {
             return
         }
         
-        let dockerRuntime = detectRuntime(preferred: .docker)
+        let dockerRuntime = detectRuntime(preferred: .appleContainer)
                 
         let request = ContainerRequest(image: "redis:7")
             .withExposedPort(6379)

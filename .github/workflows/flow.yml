@@ -24,8 +24,8 @@ jobs:
 #             echo ${{ github.actor }}
 
   # 2. Info about container
-  #    - name: Brew info container
-  #      run: brew info container
+      - name: Brew info about container
+        run: brew info container
 
 # 3. Update brew / Install docker CLI
       #- name: Instalar Docker CLI
