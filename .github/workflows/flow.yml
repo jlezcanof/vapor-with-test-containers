@@ -14,8 +14,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  #build-and-test-in-macos-26:
-  #  runs-on: macos-26
+  build-and-test-in-macos-26:
+    runs-on: macos-26
   #  steps:
   #    - name: Version of swift
   #      run: swift --version
