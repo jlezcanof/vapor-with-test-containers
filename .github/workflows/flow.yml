@@ -27,7 +27,7 @@ jobs:
       - name: Brew info about container
         run: |
               which brew
-              brew install∑ container
+              brew install container
               brew info container 
 
       - name: Checkout code
