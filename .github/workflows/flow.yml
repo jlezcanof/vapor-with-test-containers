@@ -57,7 +57,7 @@ jobs:
         run: container image ls
 
   build-and-test:
-    needs: macos-26-buikd-and-test
+    needs: macos-26-build-and-test
     # Vapor suele ejecutarse en entornos Linux para servidor
     runs-on: ubuntu-latest
 #    container: swift:latest
