@@ -23,7 +23,7 @@ jobs:
 #	  echo ${{ github }}
 #             echo ${{ github.actor }}
 
-  # 2. Info about container
+      # 2. Info about container
       - name: Brew info about container
         run: brew info container
 
@@ -40,8 +40,8 @@ jobs:
       #    /opt/homebrew/opt/colima/bin/colima start -f
           # docker context ls
 
-       - name: Checkout code
-         uses: action/checkout@v6
+      - name: Checkout code
+        uses: action/checkout@v6
 
 #      - name: Use of cache
 #        uses: actions/cache@v5
