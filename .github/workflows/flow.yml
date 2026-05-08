@@ -30,7 +30,7 @@ jobs:
               brew install container
               #brew info container
               brew services start container
-              container system start
+              container system start --help
               #container system status
 
       - name: Checkout code
