@@ -8,6 +8,8 @@ import Testing
 import TestContainers
 import Foundation
 import FluentPostgresDriver
+
+
 //@testable import VaporWithTestContainers
 //import Logging
 
@@ -16,6 +18,18 @@ import FluentPostgresDriver
 //            handler.logLevel = .trace
 //            return handler
 //        }
+
+extension Tag {
+    @Tag static var appleContainers: Self
+}
+
+extension Tag {
+    enum vapor_with_test_containers {}
+}
+
+extension Tag.vapor_with_test_containers {
+    @Tag static var appleContainers: Tag
+}
 
 @Suite("TestContainers_proof",.serialized, .tags(.appleContainers))
 struct AppleTestContainers {
