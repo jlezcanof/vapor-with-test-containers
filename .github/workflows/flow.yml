@@ -52,9 +52,19 @@ jobs:
               TESTCONTAINERS_RUN_APPLE_CONTAINER_TESTS=1 swift test --filter VaporWithTestsINAppleContainers
               #echo "Todos los tests del target VaporWithTestsInApplecontainer pasaron satisfactoriamente"
               swift test --filter VaporWithTestsInAppleContainers 2>&1 | tee tests_output.txt
+              if grep -q "suites failed" tests_output.txt; then
+                echo "Fallaron los tests"
+                exit 1
+              fi
+              if grep -q "error: fatalError" tests_output.txt; then
+                echo "Error fatal grave"
+                exit 1
+              fi
 
-      - name: Listado de imagenes de Apple Container
-        run: container image ls
+      - name: Info sobre las imágenes, contenedores de Apple Container
+        run: |
+              container ps
+              container image ls
 
   build-and-test:
     needs: macos-26-build-and-test
