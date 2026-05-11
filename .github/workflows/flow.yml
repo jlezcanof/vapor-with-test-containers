@@ -83,8 +83,8 @@ jobs:
         run: |
               echo "Paso container system"
               container system status
-              echo "Paso container ps"
-              container ps
+              #echo "Paso container ps"
+              #container ps
               echo "Paso container image ls"
               container image ls
 
