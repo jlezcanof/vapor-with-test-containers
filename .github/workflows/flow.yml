@@ -26,6 +26,7 @@ jobs:
       # 2. Info about container
       - name: Brew info about container
         run: |
+              echo $SHELL
               brew install container
               echo "Primer paso"
               brew info container
