@@ -81,9 +81,11 @@ jobs:
 
       - name: Info sobre las imágenes, contenedores de Apple Container
         run: |
-              which container
+              echo "Paso container system"
               container system status
+              echo "Paso container ps"
               container ps
+              echo "Paso container image ls"
               container image ls
 
   build-and-test:
