@@ -27,7 +27,9 @@ jobs:
       - name: Brew info about container
         run: |
               brew install container
-              #brew info container
+              brew info container
+              container --help
+              ls /opt/homebrew/Cellar/container/0.11.0/libexec/container-plugins/ps
               which container
               #brew services start container > services_start_container.txt
               #echo "Mostrando el fichero services_start_container"
