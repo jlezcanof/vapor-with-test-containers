@@ -29,8 +29,8 @@ jobs:
               brew install container
               echo "Primer paso"
               brew info container
-              echo "Segundo paso"
-              ls /opt/homebrew/Cellar/container/0.11.0/libexec/container-plugins/ps
+              #echo "Segundo paso"
+              #ls /opt/homebrew/Cellar/container/0.11.0/libexec/container-plugins/ps
               echo "Tercer paso"
               which container
               #brew services start container > services_start_container.txt
