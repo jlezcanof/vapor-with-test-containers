@@ -26,11 +26,12 @@ jobs:
       # 2. Info about container
       - name: Brew info about container
         run: |
-              brew install container
-              #brew info container
               which container
-              brew services start container
-              container system start
+              #brew install container
+              #brew info container
+              #which container
+              #brew services start container
+              #container system start
               #container system status --help
 
       - name: Checkout code
