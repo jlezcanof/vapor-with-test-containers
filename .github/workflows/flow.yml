@@ -34,7 +34,10 @@ jobs:
               echo "Tercer paso"
               which container
               echo "Cuarto paso"
-              container system start
+              #brew services start container
+              container system start --help
+              container system kernel --help
+              container --help
               #brew services start container > services_start_container.txt
               #echo "Mostrando el fichero services_start_container"
               #cat services_start_container.txt
