@@ -23,9 +23,9 @@ struct ProcessRunner: Sendable {
         // Convert environment to Subprocess.Environment format
         let env: Subprocess.Environment
         if environment.isEmpty {
-//            env = .inherit
-            env = .inherit.updating([Subprocess.Environment.Key(rawValue: "PATH")!:
-                                    "/usr/local/bin:/usr/bin:/bin:" + (ProcessInfo.processInfo.environment["PATH"] ?? "")])
+            env = .inherit
+//            env = .inherit.updating([Subprocess.Environment.Key(rawValue: "PATH")!:
+//                                    "/usr/local/bin:/usr/bin:/bin:" + (ProcessInfo.processInfo.environment["PATH"] ?? "")])
         } else {
             var updates: [Subprocess.Environment.Key: String?] = [:]
             for (key, value) in environment {

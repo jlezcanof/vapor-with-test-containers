@@ -60,32 +60,6 @@ jobs:
     needs: macos-26-build-and-test
     # Vapor suele ejecutarse en entornos Linux para servidor
     runs-on: ubuntu-latest
-#    container: swift:latest
-#    services:
-#      postgres:
-#        image: postgres:17.5
-#        env:
-#          POSTGRES_DB: egymDB
-#          POSTGRES_USER: gymUser
-#          POSTGRES_PASSWORD: NADGzUX+C4JhE35vRZ2sgLXDtSt5K7X9nxxyMUOaJt8=
-#        ports:
-#          - 5432:5432
-#        options: >-
-#          --health-cmd pg_isready
-#          --health-interval 10s
-#          --health-timeout 5s
-#          --health-retries 5
-
-#      redis:
-#        image: redis:latest
-#        ports:
-#          - 6379:6379
-#        options: >-
-#          --health-cmd "redis-cli ping"
-#          --health-interval 10s
-#          --health-timeout 5s
-#          --health-retries 5
-
     steps:
 #      - name: Dump github context
 #        run: |
