@@ -37,6 +37,7 @@ jobs:
               echo "Cuarto paso"
               #container system start
               printf 'Y\n' | container system start
+              echo "Quinto paso"
               container system status
               #container system kernel install --yes
               #brew services start container
@@ -47,18 +48,6 @@ jobs:
               #echo "Mostrando el fichero services_start_container"
               #cat services_start_container.txt
               #brew services start container
-              #for i in {1..30}; do
-              #  echo "Intento $i..."
-              #  if container system status; then
-              #    exit 0
-              #  fi 
-              #  sleep 2 
-              #done               
-              #echo "Container no arrancó"
-              #exit 1
-              #container system start
-              #container system status --help
-              #container system status
               echo "Último paso"
               launchctl list | grep container
 
