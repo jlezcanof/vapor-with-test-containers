@@ -34,7 +34,8 @@ jobs:
               cat services_start_container.txt
               #container system start
               #container system status --help
-              container system status
+              #container system status
+              launchctl list | grep container
 
       - name: Checkout code
         uses: actions/checkout@v6
