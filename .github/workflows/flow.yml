@@ -35,8 +35,8 @@ jobs:
               echo "Tercer paso"
               which container
               echo "Cuarto paso"
-              container system start
-              #printf 'Y\n' | container system start
+              #container system start
+              printf 'Y\n' | container system start
               #container --help
               #container system kernel install --yes
               #brew services start container
