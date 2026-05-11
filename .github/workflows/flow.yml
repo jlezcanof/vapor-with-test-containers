@@ -30,9 +30,9 @@ jobs:
               echo "Primer paso"
               brew info container
               echo "Segundo paso"
-              #container --help
-              #ls /opt/homebrew/Cellar/container/0.11.0/libexec/container-plugins/ps
-              #which container
+              ls /opt/homebrew/Cellar/container/0.11.0/libexec/container-plugins/ps
+              echo "Tercer paso"
+              which container
               #brew services start container > services_start_container.txt
               #echo "Mostrando el fichero services_start_container"
               #cat services_start_container.txt
