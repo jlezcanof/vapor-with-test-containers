@@ -26,12 +26,12 @@ jobs:
       # 2. Info about container
       - name: Brew info about container
         run: |
-              which brew
+              which container
               brew install container
               #brew info container
               brew services start container
-              container system start --help
-              #container system status
+              container system start
+              #container system status --help
 
       - name: Checkout code
         uses: actions/checkout@v6
@@ -63,6 +63,8 @@ jobs:
 
       - name: Info sobre las imágenes, contenedores de Apple Container
         run: |
+              which container
+              container system status
               container ps
               container image ls
 
