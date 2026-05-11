@@ -30,32 +30,28 @@ jobs:
               brew install container
               echo "Primer paso"
               brew info container
+
               #echo "Segundo paso"
               #ls /opt/homebrew/Cellar/container/0.11.0/libexec/container-plugins/ps
+
               echo "Tercer paso"
               which container
+
               echo "Cuarto paso"
               #container system start
               printf 'Y\n' | container system start
+
               echo "Quinto paso"
               container system status
-              #container system kernel install --yes
-              #brew services start container
-              #container system start --help
-              #container system kernel --help
 
-              #brew services start container > services_start_container.txt
-              #echo "Mostrando el fichero services_start_container"
-              #cat services_start_container.txt
-              #brew services start container
               echo "Último paso"
               launchctl list | grep container
 
       - name: Checkout code
         uses: actions/checkout@v6
 
-     # - name: Use of cache
-     #   uses: actions/cache@v5
+      - name: Use of cache
+        uses: actions/cache@v5
      #       with:
      #       path: .build
      #       key: ${{ runner.os }}-spm-${{ hashFiles('Package.resolved') }}
