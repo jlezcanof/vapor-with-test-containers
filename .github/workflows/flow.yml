@@ -37,12 +37,12 @@ jobs:
               echo "Cuarto paso"
               #container system start
               printf 'Y\n' | container system start
-              #container --help
+              container system status
               #container system kernel install --yes
               #brew services start container
               #container system start --help
               #container system kernel --help
-              #container --help
+
               #brew services start container > services_start_container.txt
               #echo "Mostrando el fichero services_start_container"
               #cat services_start_container.txt
@@ -59,6 +59,7 @@ jobs:
               #container system start
               #container system status --help
               #container system status
+              echo "Último paso"
               launchctl list | grep container
 
       - name: Checkout code
