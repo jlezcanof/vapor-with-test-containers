@@ -26,9 +26,9 @@ jobs:
       # 2. Info about container
       - name: Brew info about container
         run: |
-              which container
               brew install container
               #brew info container
+              which container
               brew services start container
               container system start
               #container system status --help
