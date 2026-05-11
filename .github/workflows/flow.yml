@@ -30,19 +30,19 @@ jobs:
               brew info container
               container --help
               ls /opt/homebrew/Cellar/container/0.11.0/libexec/container-plugins/ps
-              which container
+              #which container
               #brew services start container > services_start_container.txt
               #echo "Mostrando el fichero services_start_container"
               #cat services_start_container.txt
-              brew services start container
-              for i in {1..30}; do
-                echo "Intento $i..."
-                if container system status; then
-                  exit 0
-                fi 
-                sleep 2 
-              done               
-              echo "Container no arrancó"
+              #brew services start container
+              #for i in {1..30}; do
+              #  echo "Intento $i..."
+              #  if container system status; then
+              #    exit 0
+              #  fi 
+              #  sleep 2 
+              #done               
+              #echo "Container no arrancó"
               exit 1
 
               #container system start
