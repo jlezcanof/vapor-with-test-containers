@@ -32,6 +32,7 @@ jobs:
               brew services start container
               #container system start
               #container system status --help
+              container system status
 
       - name: Checkout code
         uses: actions/checkout@v6
