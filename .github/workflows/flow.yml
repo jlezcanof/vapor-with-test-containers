@@ -64,7 +64,6 @@ jobs:
       - name: Run VaporWithTestsInAppleContainers
         run: |
               TESTCONTAINERS_RUN_APPLE_CONTAINER_TESTS=1 swift test --filter VaporWithTestsINAppleContainers
-              #echo "Todos los tests del target VaporWithTestsInApplecontainer pasaron satisfactoriamente"
               swift test --filter VaporWithTestsInAppleContainers 2>&1 | tee tests_output.txt
               if grep -q "suites failed" tests_output.txt; then
                 echo "Fallaron los tests"
@@ -74,6 +73,7 @@ jobs:
                 echo "Error fatal grave"
                 exit 1
               fi
+              echo "Todos los tests del target VaporWithTestsInAppleContainer pasaron satisfactoriamente"
 
       - name: Info sobre las imágenes, contenedores de Apple Container
         run: |
@@ -159,8 +159,8 @@ jobs:
              echo "listado de contenedores"
              docker ps
              echo "borramos las imágenes docker"
-             #docker image ls --format "{{.ID}}" | xargs -r docker rmi
-             docker image ls --format "{{.IMAGE}}" | xargs -r docker rmi
+             docker image ls --format "{{.ID}}" | xargs -r docker rmi
+             #docker image ls --format "{{.IMAGE}}" | xargs -r docker rmi
              echo "Todos los tests pasaron satisfactoriamente"
              # Es otra forma de lanzar los tests, comprobando su resultado satisfactorio o no
   security-review:
