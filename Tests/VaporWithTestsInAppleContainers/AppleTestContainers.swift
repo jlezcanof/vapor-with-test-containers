@@ -43,11 +43,12 @@ struct AppleTestContainers {
             return
         }
         
-        let appleContainer = detectRuntime(preferred: .appleContainer)
+        let appleContainer = AppleContainerClient()
                 
         let request = ContainerRequest(image: "redis:7")
             .withExposedPort(6379)
-            .waitingFor(.tcpPort(6379))
+            .waitingFor(.tcpPort(6379)
+            )//.withPlatform("")
         
         try await withContainer(request, runtime: appleContainer) { container in
             let port = try await container.hostPort(6379)

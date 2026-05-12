@@ -64,13 +64,15 @@ func withContainer<T>(
     operation: @Sendable (Container) async throws -> T
 ) async throws -> T {
     logger.debug("Checking Docker availability")
+    print("chequeando disponibilidad del container")
     if !(await runtime.isAvailable()) {
         logger.error("Docker not available")
         throw TestContainersError.dockerNotAvailable("`docker` CLI not found or Docker engine not running.")
     }
 
     let reuseEnabledForRequest = request.reuse && reuseConfig.enabled && request.imageFromDockerfile == nil
-
+    print("reuseEnabledForRequest \(reuseEnabledForRequest))")
+    
     // Build image from Dockerfile if specified
     let builtImageTag: String?
     if let dockerfileConfig = request.imageFromDockerfile {
